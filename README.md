@@ -14,7 +14,7 @@ Today
 #### HTML의 중요 태그들 
 - w3schools.com 에서 확인 가능
 
- <title>
+ '<title>'
  <h1> <h2>...
  <ul> : unordered list 
  <li> : 리스트
