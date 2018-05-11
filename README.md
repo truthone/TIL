@@ -14,8 +14,8 @@ Today
 #### HTML의 중요 태그들 
 - w3schools.com 에서 확인 가능
 
- '<title>'
- '<h1> <h2>...'
- '<ul> : unordered list' 
- '<li> : 리스트'
- '<a> : 닻을 내린다 , href : 속성으로 url.' 
+ 'title'
+ 'h1 ,h2...'
+ 'ul : unordered list' 
+ 'li : 리스트'
+ 'a : 닻을 내린다 , href : 속성으로 url.' 
