@@ -28,7 +28,9 @@ Today
  - nav : navigation 
  - header, footer.. 적용안되는 하위 버전은 'div = header' 이런식으로 쓰기도 한다. 
  - aside / section ...
+ 
  *div를 남용 하는 것은 안좋고, 협업 시 동료들과 협의해서 태그 뭘 쓸지를 정한다. 
+ 
  *구조화 설계 !
  
  #### Id & class
