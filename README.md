@@ -157,6 +157,50 @@ ex) content설정 여기저기 있는걸 모으고 싶다 하면
 +) less 컴파일 
 
 
+## 20180518 
+
+<BE - 개발 설정하기 >
+- java coding convention - 구글꺼 번역해서 정리해볼까?
+
+- 프로젝트명, 패키지명 - 소문자로 
+- 클래스명 - 대문자로 
+
+<tomcat 설치하기>
+
+- WAS > Apache의 Tomcat : 웹 어플리케이션 실행 위해 필요하다. 
+WAS 란 무엇인가? 
+
+-tomcat 설치 후 
+127.0.0.1: 8080 들어갔는데 로그인하라고함.. 
+찾아보니 
+
+<!--
+  <role rolename="tomcat"/>
+  <role rolename="role1"/>
+  <user username="tomcat" password="<must-be-changed>" roles="tomcat"/>
+  <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
+  <user username="role1" password="<must-be-changed>" roles="role1"/>
+-->
+//여기에 이 두줄을 추가해줘 권한을 설정한다. 
+   <role rolename="manager-gui"/>
+  <user username="admin" password="admin" roles="manager-gui"/>
+
+</tomcat-users>
+
+출처 - https://www.mkyong.com/tomcat/tomcat-default-administrator-password/
+
+role은 아래에 보면 여러가지가 있다. 
+
+1) manager-gui — Access to the HTML interface.
+2) manager-status — Access to the "Server Status" page only.
+3) manager-script — Access to the tools-friendly plain text interface that is described in this 4) document, and to the "Server Status" page.
+5) manager-jmx — Access to JMX proxy interface and to the "Server Status" page.
+
+출처 - tomcat.apache.org
+
+ 
+
+
  
  
  
