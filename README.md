@@ -1,5 +1,3 @@
-# Today I Learned
-Today 
 
 ## 20180511
 ### edwith - html & CSS
@@ -271,7 +269,7 @@ doPost ,, doGet ,,
 - HttpServletRequest 객체
 - HttpServletResponse 객체
 
---------------------------------------------
+---
 
 <less compile 하기>
 
@@ -400,7 +398,7 @@ arguments로 배열의 형태로 하나씩 접근 할 수 있다. (하지만 배
 ## 180524 
 ### WEB UI 개발 - FE
 
-window 객체 (전역 객체) - setTimeout 메서드 
+#### window 객체 (전역 객체) - setTimeout 메서드 
 - 인자로 함수를 받고 있다.
 - 콜백 함수다. 
 - 비동기 함수이다. 
@@ -411,6 +409,65 @@ window 객체 (전역 객체) - setTimeout 메서드
 > }, 몇 초 )  
 
 +) setInterval 
+
+---
+
+## 180526
+
+#### DOM (Document Object Model)
+
+- 브라우저는 html 코드를 dom 이라는 객체 형태 모델로 저장한다.
+- dom 루트 노드 : Document
+
+document(루트 노드)의 DOM API (함수들)을 쓸 수 있다.
+> .getEliementById("")
+> .querySelector("dffdadff") ->  dffdadff 아이디 값 찾기
+> .querySelector("#dffdadff") -> 태그가 dffdadff인 element 찾기
+> .querySelector("(부모) .dffdadff") -> 부모 아래 dffdadff인 element 찾기
+> (바로 아래 자식 찾는 거면 . 대신 -> 이거써도 ok )
+> querySelectorAll : div인거 모두 찾기.
+
+---
+
+#### Browser Event / Event object, Event handler
+
+##### Event
+.addEventListener 함수 
+
+객체.addEventListener("어떤이벤트(이벤트 이름)", function((매개변수)){
+     //do something..
+}, false);
+
+: 어떤이벤트가 발생하면 함수가 실행되는데 , 이 함수가 이벤트 핸들러 또는 이벤트리스너
+
+[참고 자료]
+[link] (https://developer.mozilla.org/en-US/docs/Web/Events)
+Introduction to events: [link](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_handler_properties)
+
+---
+
+#### Ajax(XMLHttpRequest) 통신의 이해 - 비동기!
+
+비동기로 서버로부터 데이터를 가져오는 것
+요즘은 화면의 새로고침 없이, 화면의 일부분만 갱신 할 수 있다.
+
+- JSON :  Ajax 를 위한 데이터 포맷 중 하나.
+
+> XMLHttpRequest : 객체 생성.
+> .open 메서드 : 요청 준비.
+> .send 메서드 : 서버로 보냄.
+> GET 방식으로 url 보낸다.
+
+- setTimeout함수의 콜백함수의 실행과 유사하게 동작하는 '비동기' 로직이다.
+-
++) CORS (Cross-Origin Resouce Sharing): Http 접근 제어
+HTTP gpejemf
+
+
+참고 자료 :
+Ajax사용 예제 :[link]{https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_handler_properties}
+
+
 
 
 
