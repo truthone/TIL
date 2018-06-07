@@ -633,6 +633,23 @@ ${<표현1>.<표현2>}
 +) 표현언어 (EL) 비활성화 하기 - JSP에 명시하기 : <%@ page isEXIgnored = "true"%>
 - EL에서 사용 할 수 있는 기본 객체
 
+*180607*
+
+## JSTL (JSP Standard Tag Library)
+프론트 개발자가 보기 쉽게 하여 유지 보수 쉽게한다. -> 자바랑 섞여 있는 문서를 html tag
+형태로 통일 한다.
+html tag 형식으로 조건문 처리, 반복문 처리 변수선언 등 할 수 있다.
+prefix tag 내가 바꿀 수 있다.
+
+객체의 프로퍼티 - getter setter를 생각 하면 된다. (약속을 꼭 지켜서 작성하자)
+
+forEach - 배열이나 리스트에서 저장된 요소를 뽑아 낼 수 있다. 
+
+
+url 연결태그 -import 
+param .. 부분에 연결할 url 값 넣어준다 .
+
+
 
  
 
