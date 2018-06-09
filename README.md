@@ -661,6 +661,39 @@ DML / DDL / DCL
  @'%' : 어떤 클라이언트에서든 접근 가능.
  @'localhost' : 해당 컴퓨터에서만 가능. 
  
+ 
+ 
+권한 부여 쿼리 후 flush privileges; 명령 꼭 하기. (db 반영)
+
+[desc 테이블명] 또는 [describe 테이블명] 명령
+
+.
+.
+.
+
+*180609*
+## Maven
+
++) pom.xml 파일 작성방법 조사하기
+
+## JDBC
+방법 앤드 절차 규약. 자바를 이용해 db접속 , 쿼리 실행 그리고 결과로 얻은 데이터의 핸들링을 제공한다.
+
+[JDBC 이용한 프밍 방법]
+1단계 : import java.sql.*;
+2단계 : 드라이버를 로드한다. -> 각각DB 벤더를 연결한다. 
+3단계 : Connection 객체를 생성한다 -> DB접속 절차
+4단계 : Statement 객체 생성 및 질의 수행 -> 쿼리문 생성 실행을 Statement 객체가 도와준다 .
+5단계 : SQL 문에 결과물이 있다면 ResultSet 객체를 생성한다. -> 쿼리문이 무엇이냐에 따라 다를 수 있다. (select는 조회하는 거고 insert는 한 후 잘 됐다 ~
+이런 결과를 주는 차이에서 차이..)
+6단계 : 단계 다하고 꼭 모든 객체를 닫는다. (생성관계 반대 순서로 닫는다. )
+JDBC 클래스 생성 관계 : DriverManager -> Connection -> Statemnet -> ResultSet 
+
+
+JDBC 실습
+tip. 메이븐 설정하고 꼭 메이븐 업데이트해주자 .
++) 카멜표기법 지키기.
+
 
 
 
