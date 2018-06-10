@@ -694,9 +694,23 @@ JDBC 실습
 tip. 메이븐 설정하고 꼭 메이븐 업데이트해주자 .
 +) 카멜표기법 지키기.
 
+*180610*
+
+## Rest API
+Rest API란? 다양해진 클라이언트 종류에 정보 제공하는 방식을 일원화 시키는 방식 중
+HTTP 프로토콜로 API를 제공하는 대표적 방식.
+
+REST 구성 : 자원 (URI) + 행위 (HTTP method) + 표현
+
+[출처] edwith, http://meetup.toast.com/posts/92
 
 
+## webAPI 실습
+- /~~~/* : 별표 의미 : 무슨 문자든 올 수 있다. 
 
+
+JS : DOM / Event / Ajax
+특히 자바스크립트 함수 이해.
  
 
    
