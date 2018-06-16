@@ -423,7 +423,7 @@ arguments로 배열의 형태로 하나씩 접근 할 수 있다. (하지만 배
 *180526*
 
 #### DOM (Document Object Model)
-
+- API
 - 브라우저는 html 코드를 dom 이라는 객체 형태 모델로 저장한다.
 - dom 루트 노드 : Document
 
