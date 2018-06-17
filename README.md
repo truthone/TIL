@@ -713,6 +713,31 @@ REST 구성 : 자원 (URI) + 행위 (HTTP method) + 표현
 
 JS : DOM / Event / Ajax
 특히 자바스크립트 함수 이해.
+
+*180617*
+
+## PJ02 DB 연결한 웹어플리케이션 : TO-DO List 
+
+- html로 웹 UI 구조 잡기. 
+- 구조 잡은 html css로 꾸미기.
+- window 객체 _ .setTimeout과 비동기 
+동기적인 다른 실행이 끝난 후 실행된다.
+
+- DOM 
+브라우저는 elemnet를 DOM Tree형태로 저장한다. 
+자바스크립트로 구현해서 html element를 찾기엔 복잡하다. 
+DOM API를 이용하여 쉽게 html element를 찾을 수 있다. 
+
+1. getElemnetById() : ID 정보를 통해서 찾을 수 있다. 
+2. Element.querySelector() : 
++) Element.quierySelectorAll()
+3. css selector
+
+- 이벤트 리스너 
+
+- AJAX(XMLHttpRequest 통신) : 비동기 통신
+ 
+
  
 
    
