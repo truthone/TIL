@@ -846,11 +846,45 @@ css transition transform .. 이 빠르다.
 
 +) vendor prefix
 
-#### 서비스 개발을 위한 디렉토리 구성 
+*180720*
 
-많아진 JS코드를 어떻게 보관하고 표현할까 ?
--> 
-   
+#### Spring (프레임워크)
+
+프레임워크 : 반제품 
+모듈화가 잘되있다. 전부 다 알 필요 없고, 필요할 때 필요한 것을 사용하자.
++) AOP
+
+[스프링 웹 계층]
+spring-web 모듈 : 멀티파트 파일 업로드  / 서블릿 리스너 등/// 
+spring-webmvc 모듈 : 다른 말로 Web-servlet모듈. Spring MVC 및 REST 웹 서비스 구현 .
+spring-websocket 모듈
+spring-webmvc-portlet 모듈
+
+
+[스프링 프레임워크 핵심 개념]
+- Container
+- IoC (Inversion of Control)
+- DI (Dependency Injection )
+
+
+- Container
+인스턴스 생명주기 관리. 인스턴스의 생성 부터 소멸까지 내가 직접하는 것이 아니라 컨테이너가 알아서 해준다. 
+앞 시간에서 배웠듯이 Tomcat이라는 WAS가 가지고 있는 컨테이너가 servlet 생성 ~ 소멸 관리한다.  JSP 
+
+- IoC (제어의 역전)
+inversion : 도치, 역전 
+
+예를 들어 , 일상에 있는 tv 리모컨의 기본적인 구성과 기능 인터페이스가 동일 한 것과 
+TV공장을 만든다. -> 이 부분을 spring이 대신 해준다. 
+                   스프링이 가진 공장 2개 : 1) BeanFactory: 완전 간단기능만 있음. 
+                                        : 2) ApplicationContext : 빈팩토리 +a 그래서 더 많이 쓰인다.
+
+어노테이션.. 
+
+- DI (의존성 주입)
+컨테이너가 생성한 객체를 받아 온다. 
+그렇게 공장에서 만들어진 인스턴스를 가져올 수 있는 방법 중 하나이다.
+ 
      
 
 
