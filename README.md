@@ -904,6 +904,158 @@ HTML5형식으로 작성하길 권장 - 그럼 독타입 선언안해도됨.
 마루180
 아산나눔재단 
 
+
+*180728*
+#### DOMContentLoaded
+DOM ContentLoaded : DOM Tree를 먼저 모두 로드됐을 때를 알린다. document
+Load :모든 이벤트들 .. 모두 로드 했을 때 . window
+
+보통 html, css... 등 브라우저 렌더링 작업이 다 끝나고 나서 이벤트실행 하고 노드변경 찾는 등의 JS는
+html 맨 아래 쪽에 위치 시킨다. 하지만 이렇게 해도 DOMTree가 다 구성 되기 전에 JS 실행 되는 경우가 있다.
+DOMContentLoaded 이벤트는 DOM Tree가 모두 로드 되어 구성됐을 때를 알린다.
+DOMContentLoaded 이벤트안에 DOM Tree 모두 로드 후 실행 시킬 일들을 써주면 좋다. (노드 찾기 , 구성등?)
+
+#### Event delegation (기법) - 부모 엘리먼트에 위임한다.
+list가 각자 UI에 각각 비슷한 이벤트를 걸어 처리해야 한다면 ?
+이벤트 등록을 효율적으로 어떻게 할까 ? for문을/?
+
+맨 상위 엘리먼트에 이벤트 리스너 등록하면 하위 엘리먼트 클릭해도 된다!
++) firstChild / firstElementChild 차이
+firstElementchild 공백 확인
+
+브라우저가 기억해야 할 이벤트 핸들러가 많이지면 메모리사용이 비효율적으로 된다.
+
+그럼 어케 ? target정보를 이용하자
+target : 내가 클릭한 지점 정보 .
+
+- Bubbling : 하위 엘리먼트를 클릭했더라도 상위엘리먼트 쭉쭉 검색 올라가면서 그중에 등록한 이벤트 리스너가 있다면 실행된다.
+기본적으로 버블링 순서로 이벤트가 발생된다.
+
+- Capturing : 버블링과 반대로 이벤트 발생.
+캡처링 단계에서 이벤트 발생 시키고 싶다면 addEventListener 메서드 3번째 인자값 : true 지정.
+
+[발생 순서] ex) Element 1 > Element 2 > Element 3 이라면,
+캡처링 : 1 -> 2 -> 3 / 버블링 : 3 -> 2-> 1
+
+<예제 코드>
+ul.addEventListener("click", function(evt){
+   // target이 image이면 src를 추출해서 출력한다.
+   var target = evt.target;
+   if(target.tagName === "IMG") {
+      log.innerHTML = "IMG URL은, " + target.src;
+   }
+
+})
+
+만약 이미지들 사이 패딩을 클릭해도 이미지 정보가 나오게 하고 싶다면. ,
+
+<예제 코드>
+ul.addEventListener("click", function(evt){
+   // target이 image이면 src를 추출해서 출력한다.
+   var target = evt.target;
+   if(target.tagName === "IMG") {
+      log.innerHTML = "IMG URL은, " + target.src;
+   } else if (target.tagName === "LI") {
+      log.innerHTML = "IMG URL은," + target.firstElementChild.src;
+   }
+
+})
+
+
+#### HTML templating 작업
+서버롭터 받은 데이터를 화면에 반영해야 할 때가 많은데, HTML 형태는 그대로인데 데이터만 변경되는 경우는
+어떻게 처리해야 효율적일까?
+
+- HTML templation 이란 ?  HTML과 데이터를 섞어서 표현하는 방법.
+
+
+보통 백엔드에서 데이터조회 후, 그 내용들을 동적으로 HTML로 만들어 클라이언트에 보내준다.
+회사에서도 동적으로 클라이언트에서 생성할까 서버에서 할까 고민이다..
+
+서버에서 보내준 JSON Data을  HTML Template 에 알맞게 넣어주면 이것이 HTML templating !
+
+
+- String의 replace
+replace() 메서드를 쓴다.
+
++) regular expression 을 쓰면 더 막강해진다.
+
+repalce는 메서드 체이닝 방식으로 호출하면서 풀이할 수 있다.
+*메서드 체이닝*
+
+data가 배열형태면 여러개면 , 간단한 반복문 또는 forEach같은 메서드 사용.
+
+<예제 코드>
+var data = {
+              title: "hello",
+              content : "chicken"
+              price : 20000
+           };
+var html =
+"<li>
+<h4>{title}</h4>
+<p>{content}</p>
+<div>{price}</div>
+</li>";
+
+html.replace("{title}", data.title)
+    .replace("{content}", data.content)
+    .replace("{price}", data.price);
+
+
+
+어떻게 템플릿을 보관 할 수 있을까?
+
+JS를 정적데이터로 html로 넣는 건 좋지않다. 다음 두가지 방법이 있다.
+1) 서버에 file로 보관헤서 Ajax로 요청 받아온다.
+2) HTML 코드 안에 숨겨둔다
+HTML script태그는 type이 javascript가 아니면 렌더링안하고 무시한다. 이 속성을 이용해 HTML Template을 숨겨둔다.!
+type은 내맘대로 쓰면 된다. 추가로 ES6에의 템플릿 리터럴이라는건 repalce를 안쓰고 편하게 된다..
+
+<예제 코드>
+
+<script id="template-list-item" type="text/template">
+ <li>
+  ~~~~~내용~~~
+ </li>
+</script>
+
+<script>
+  //위에 선언한 JS의 id값을 DOM Api를 이용해 가져올 수 있다.
+  //.innerHTML DOM Api를 이용해 데이터를 뽑아오자.
+   var html = document.querySelector("#template-list-item").innerHTML
+
+</script>
+
+var data = [
+        {title : "hello",content : "lorem dkfief",price : 2000},
+        {title : "hello",content : "lorem dkfief",price : 2000}
+];
+
+var html = document.querySelector("#template-list-item").innerHTML;
+
+var resultHTML = "";
+
+for(var i =0; i< data.length; i++){
+   resultHTML += html.replace("{title}", data[i].title)
+                     .replace("{content}", data[i].content)
+                     .replace("{price}", data[i].price);
+}
+
+document.querySelector(".content").innerHTML = resultHTML;
+
+
++) innerHTML말고 특정 부위에 넣고싶을 때 쓰는 메서드는 insertAdjacentHtml 이나 insertBefore....
+
+
+#### Tab UI를 만들기 위한 HTML과 CSS 구조전략
+
+- Tab UI Component
+
++) tap UI 클릭시 ajax로 데이터를 받아올 때, 매번 똑같은 데이터를 새로 받아오지말고
+이미 가져온 데이터는 배열로 저장하고 재사용 하도록 하자 -> 캐쉬 기능
+
+
  
      
 
