@@ -846,45 +846,6 @@ css transition transform .. 이 빠르다.
 
 +) vendor prefix
 
-*180720*
-
-#### Spring (프레임워크)
-
-프레임워크 : 반제품 
-모듈화가 잘되있다. 전부 다 알 필요 없고, 필요할 때 필요한 것을 사용하자.
-+) AOP
-
-[스프링 웹 계층]
-spring-web 모듈 : 멀티파트 파일 업로드  / 서블릿 리스너 등/// 
-spring-webmvc 모듈 : 다른 말로 Web-servlet모듈. Spring MVC 및 REST 웹 서비스 구현 .
-spring-websocket 모듈
-spring-webmvc-portlet 모듈
-
-
-[스프링 프레임워크 핵심 개념]
-- Container
-- IoC (Inversion of Control)
-- DI (Dependency Injection )
-
-
-- Container
-인스턴스 생명주기 관리. 인스턴스의 생성 부터 소멸까지 내가 직접하는 것이 아니라 컨테이너가 알아서 해준다. 
-앞 시간에서 배웠듯이 Tomcat이라는 WAS가 가지고 있는 컨테이너가 servlet 생성 ~ 소멸 관리한다.  JSP 
-
-- IoC (제어의 역전)
-inversion : 도치, 역전 
-
-예를 들어 , 일상에 있는 tv 리모컨의 기본적인 구성과 기능 인터페이스가 동일 한 것과 
-TV공장을 만든다. -> 이 부분을 spring이 대신 해준다. 
-                   스프링이 가진 공장 2개 : 1) BeanFactory: 완전 간단기능만 있음. 
-                                        : 2) ApplicationContext : 빈팩토리 +a 그래서 더 많이 쓰인다.
-
-어노테이션.. 
-
-- DI (의존성 주입)
-컨테이너가 생성한 객체를 받아 온다. 
-그렇게 공장에서 만들어진 인스턴스를 가져올 수 있는 방법 중 하나이다.
-
 
 *180726*
 # QnA day
@@ -1056,8 +1017,217 @@ document.querySelector(".content").innerHTML = resultHTML;
 이미 가져온 데이터는 배열로 저장하고 재사용 하도록 하자 -> 캐쉬 기능
 
 
- 
-     
+*180720*
+
+#### Spring (프레임워크)
+
+프레임워크 : 반제품 
+모듈화가 잘되있다. 전부 다 알 필요 없고, 필요할 때 필요한 것을 사용하자.
++) AOP
+
+[스프링 웹 계층]
+spring-web 모듈 : 멀티파트 파일 업로드  / 서블릿 리스너 등/// 
+spring-webmvc 모듈 : 다른 말로 Web-servlet모듈. Spring MVC 및 REST 웹 서비스 구현 .
+spring-websocket 모듈
+spring-webmvc-portlet 모듈
+
+
+[스프링 프레임워크 핵심 개념]
+- Container
+- IoC (Inversion of Control)
+- DI (Dependency Injection )
+
+
+- Container
+인스턴스 생명주기 관리. 인스턴스의 생성 부터 소멸까지 내가 직접하는 것이 아니라 컨테이너가 알아서 해준다. 
+앞 시간에서 배웠듯이 Tomcat이라는 WAS가 가지고 있는 컨테이너가 servlet 생성 ~ 소멸 관리한다.  JSP 
+
+- IoC (제어의 역전)
+inversion : 도치, 역전 
+
+예를 들어 , 일상에 있는 tv 리모컨의 기본적인 구성과 기능 인터페이스가 동일 한 것과 
+TV공장을 만든다. -> 이 부분을 spring이 대신 해준다. 
+                   스프링이 가진 공장 2개 : 1) BeanFactory: 완전 간단기능만 있음. 
+                                        : 2) ApplicationContext : 빈팩토리 +a 그래서 더 많이 쓰인다.
+
+어노테이션.. 
+
+- DI (의존성 주입)
+컨테이너가 생성한 객체를 받아 온다. 
+그렇게 공장에서 만들어진 인스턴스를 가져올 수 있는 방법 중 하나이다.
+
+
+*180729*
+#### Spring MVC
+- MVC :
+Model : 뷰가 렌더링하는데 필요한 데이터. 예) 상품목록..
+View : 웹 어플에선 실제로 보여지는 부분. JSP ,XmL등으로 표현한다.
+Controller : 사용자의 액션에 응답하는 컴포넌트. 모델 업뎃, 다른 액션을 수행.
+
+- MVC MOdel 1 아키테처
+
+그림
+
+java bean 을 이용해서 db를 이용 . JDBC의 Role Dao 와 유사
+문제점 : jsp 에 java , html이 섞여 있어서 유지 보수 힘듬
+
+- MBC Model 2 아키텍처
+
+그림
+
+요청 자체를 서블릿이 받게 하고/.. 아래 와 같이 나눠서 구현
+컨트롤러 - 서블릿
+뷰 - jsp
+모델 - 자바 빈
+
+- MVC Model 2 발전형태
+프론트 컨트롤러 : 서블릿이 수행하고 딱 하나만 존재한다. 요청만 받고 컨트롤러(핸들러)에게
+일을 위임 .
+컨트롤러는 java bean과 같이 .. 수행 한다음 담아서 프론트 컨트롤러에 보냄
+
+=> 이런  model 2 패턴을 모듈 지원하는게 Spring MVC !!!!
+
+#### Spring MVC 구성요소 순서 이해 필수 !!
+
+[Spring 이 제공하는 부분들]
+
+- DispacherServlet (= 프론트 컨트롤러 = 전화교환부서와 같은 역할?)
+디스패처서블릿에 사용되는 컴포넌트 (객체)에는 어떤 것들이 있을까
+모든 요청을 여기서 받는다. 요청을 처리할 컴포넌트와 메서드를 핸들러 매핑에게 물어본다.
+요청 받아서 넘겨주는 일 '만' 한다.
+보통은 한 개 만 선언한다.
+
+[Dispatcher Servlet  내부 동작 흐름] *반드시 이해 할 건 아니다*
+1. 요청 선처리 작업
+디스패처서블릿는 지역화Locale(미국사람은 미국세팅 , 한국사람은 한국세팅)를 지원한다.
+HTTP 헤더 정보 보고 지역화 결정하고
+RequestContedxtHolder에 요청 저장 : httpServletrequest 어쩌고 .. 저장해서 막 쓰기? 근데 문제 가 될 수 있다.
+FlashMap 복원 : 현재 실행이 redirect 됐을  , url 복잡한 걸 복원..?
+멀티파트요청  y/s : 멀티파트 파일 요청을 정하는 파트다.
+요청 작업
+
+2. 요청 전달
+HandlerExcecutionChain 발견했냐 안했나 발견 못했으면 에러 400대
+HandlerExcecutionChain 있으면 HandlerAdapter객체가 결정된다
+만약 핸들러어댑터 없으면 서버 잘못 -> 서블릿예외 발생
+
+문제 없으면 요청 잘됨
+
+Handler Mapping  디폴트 설정들..
+
+[요청 전달시 사용된 컴포넌트들] - 강의자료
+
+3. 요청 처리
+익스큐선체인 결정되면 사용가능 인터셉터가 있는지 찾아본다
+*인터셉터 : 필터 같은거
+인터셉터 잇으면 실행 하고
+핸들러 실행 후 리턴값 준
+
+[요청 처리시 사용된 컴포넌트]
+- .ModelAndView
+Request에다 값을 넣어서 사용하는 것보다 이 컴포넌트를 쓰는게 바람직.
+
+- .RequestToViewNameTranslate
+ 컨트롤러에서 뷰 이름이나 뷰 오브젝 제공하지 않았을 떄 적절하게 제공 해주는 ..
+
+ 4. 예외처리
+
+ [예외 처리시 사용된 컴포넌트]
+
+5. 뷰 렌더링 과정
+- View Resolver
+
+6. 요청 처리 종료
+
+
+- Handler Mapping
+어떤 요청에 어떤 컨트롤러가 동작할지 .xml이나 .java에 어노테이션으로 설정한 것을
+핸들러 맵핑 객체들 생성되면서 관리하는 역할 .
+
+- Handler Adapter
+결정된 메서드앤 컨트롤러를 핸들러 어댑터에게 요청 앤드 실행 한 후 결과를
+모델에 받아서 다시 디스패처서블릿에 준다.
+
+- View Resolver
+어떤 뷰다 라고 알려주면 뷰가 출력한다.
+
+
+#### Spring MVC 실습
+
+웹브라우저에게 url 요청 후  - > 2개 값 입력 받을 수 있는 창& 버튼 있는 화면 출력
+-> 웹브라우저에 2개 값 입력 하고 버튼 클릭하면 어쩌구 URL로 입력값 post로 서버에게 보내고
+-> 서버는 2개 값 더 해서 결과값 JSP에게 request scope로 전달해서 출력하긔
+
+[pom.xml 설정 하기]
+plugins : jdk 1.8
+라이브러리 : jstl, jsp, servlet
+spring-context
+webmvc
+버전 통일 위해 프로퍼티 추가
+
+- DispatcherServlet이 FrontController이다 라고 설정하기
+
+얘도 서블릿이기 때문에 web.xml 파일에 설정 할 수 있다.
+두 가지 방법이 있다.
+1. web.xml 파일에 dispatcherServlet 설정하는 방법
+어떤 일을 할 지 알려주는 것...
+java config sprin g설정 읽어 들이도록 . javaConfig 를 읽어온다.
+urlpatten 에 맵핑할 url 넣으면 servlet-name 과 같은 name으로 매핑되어있는 servlet -class가 실행 된다 : 지난 강의 참조하기
+슬러시를 쓰면 슬러시덕분에 모든 요청을 받을 수 있다.
+
+2.  WebApplicationInitializer 를 이용해서 구현하기 : 수업에서 자세히 안다룸.
+
+단점 : 첫 구동이 오래 걸릴 수 있다.
+
+<쓰이는 어노테이션들>
+- @Configuration
+이 어노테이션을 통해 자바 config 파일이구나 알려주는 역할 이다.
+
+- @EnableWebMvc
+디스패처서블릿에서 필요한 애들 web에 필요한 빈들 자동 설정 해준다.
+xml로 설정의 <mvc:annotation-driven/>와 동일한 애 -> 수업시간엔 안한다.
+
+..버거월  ㅠㅠ 익숙해진 후 찾아보자
+
+- @ComponentScan
+Spring MVC에서 핸들러  = 컨틀로러 찾아야 하는데 componentScan 어노테이션 사용해서
+내가 직접 만들었던 빈을 이용해 직접등록도 되고 ..
+@ComponentScan (basePackages = {}) -> basePackages 꼭 설정해줘야 어디서부터 찾을 지 알 수 있다.
+
+- @EnableWebMvc
+설정 자동 로드 됨 . 수동 설정 하고 싶다면 다른거 있음
+이거 안쓰면 webMvcContextConfit-support 상속 받아야함.
+
+ - @Controller
+이거 붙여야 컨트롤러인줄 안다. 맵핑 위해 @RequestMapping 서블릿 url지정시 @Servlet 관련 어노테이션
+붙이는거랑 같다.
+
+
+- addResourceHandlers
+
+반드시 필요한 부분
+registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
+                      ----"/css/**"-------이렇게 들어오는 url요청은 ------"/css/----- 여기서 찾아요 라는 뜻임
+
+
+registry.addViewController("/").setViewName("main");
+// "/" 로 들어오는 애들은 main을 찾아줘요
+
+리졸버  - 뷰 그릴수 있게 찾아주기 ?
+어쩌구저쩌구 - ResourceViewResolver(){
+   InternalResourceViewResolver resolver  = new Internal ResourceViewResolver();
+   resolver.setPrefix("/WEB-INF/views/"); // .setViewName("main") "main" 앞에 "/WEB-INF/views/" (찾는 거 해당 경로) 붙이기 
+   resolver.setSuffix(".jsp")// .setViewName("main") "main" 뒤에 ".jsp" 붙d여서 찾을 수 있도록
+}
+
+
+- 디스패처를 프론트 컨트롤러라고 설정해주기
+web.xml  열어서.. 20분 쯤 부터
+/ 로 들어오면
+
+init-param 부분에서 앞서 webMvcContextConfiguration파일로 설정 잡아준거 등록
+
+어쩌구-ApplicationConfiguration 이건 beans공장
 
 
 
