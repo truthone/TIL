@@ -1057,7 +1057,8 @@ TV공장을 만든다. -> 이 부분을 spring이 대신 해준다.
 그렇게 공장에서 만들어진 인스턴스를 가져올 수 있는 방법 중 하나이다.
 
 
-*180729*
+*180729-31*
+
 #### Spring MVC
 - MVC :
 Model : 뷰가 렌더링하는데 필요한 데이터. 예) 상품목록..
@@ -1066,14 +1067,14 @@ Controller : 사용자의 액션에 응답하는 컴포넌트. 모델 업뎃, �
 
 - MVC MOdel 1 아키테처
 
-그림
+(그림)
 
 java bean 을 이용해서 db를 이용 . JDBC의 Role Dao 와 유사
 문제점 : jsp 에 java , html이 섞여 있어서 유지 보수 힘듬
 
 - MBC Model 2 아키텍처
 
-그림
+(그림)
 
 요청 자체를 서블릿이 받게 하고/.. 아래 와 같이 나눠서 구현
 컨트롤러 - 서블릿
@@ -1087,9 +1088,9 @@ java bean 을 이용해서 db를 이용 . JDBC의 Role Dao 와 유사
 
 => 이런  model 2 패턴을 모듈 지원하는게 Spring MVC !!!!
 
-#### Spring MVC 구성요소 순서 이해 필수 !!
+#### Spring MVC 구성요소 *순서 이해 필수 !!*
 
-[Spring 이 제공하는 부분들]
+[Spring이 제공하는 부분들]
 
 - DispacherServlet (= 프론트 컨트롤러 = 전화교환부서와 같은 역할?)
 디스패처서블릿에 사용되는 컴포넌트 (객체)에는 어떤 것들이 있을까
@@ -1097,25 +1098,59 @@ java bean 을 이용해서 db를 이용 . JDBC의 Role Dao 와 유사
 요청 받아서 넘겨주는 일 '만' 한다.
 보통은 한 개 만 선언한다.
 
-[Dispatcher Servlet  내부 동작 흐름] *반드시 이해 할 건 아니다*
+<Dispatcher Servlet  내부 동작 흐름>
 1. 요청 선처리 작업
-디스패처서블릿는 지역화Locale(미국사람은 미국세팅 , 한국사람은 한국세팅)를 지원한다.
-HTTP 헤더 정보 보고 지역화 결정하고
-RequestContedxtHolder에 요청 저장 : httpServletrequest 어쩌고 .. 저장해서 막 쓰기? 근데 문제 가 될 수 있다.
-FlashMap 복원 : 현재 실행이 redirect 됐을  , url 복잡한 걸 복원..?
-멀티파트요청  y/s : 멀티파트 파일 요청을 정하는 파트다.
-요청 작업
+- 디스패처서블릿는 지역화Locale(미국사람은 미국세팅 , 한국사람은 한국세팅)를 지원한다.
+HTTP 헤더 정보 보고 지역을 결정한다.
+
+- RequestContedxtHolder에 요청 저장 : httpServletrequest 어쩌고 .. 저장해서 막 쓰기? 근데 문제 가 될 수 있다.
+
+- FlashMap 복원 : 현재 실행이 redirect 됐을  , url 복잡한 걸 복원..?
+
+- 멀티파트요청  y/s : 멀티파트 파일 요청을 정하는 파트다.
+
+- 요청 작업
+
+[요청 선처리 작업시 사용된 컴포넌트] - 강의자료
+1) org.springframework.web.servlet.LocaleResolver
+- 지역 정보를 결정해주는 전략 오브젝트이다.
+- 디폴트인 AcceptHeaderLocalResolver는 HTTP 헤더의 정보를 보고 지역정보를 설정해준다.
+
+2) org.springframework.web.servlet.FlashMapManager
+- FlashMap객체를 조회(retrieve) & 저장을 위한 인터페이스
+- RedirectAttributes의 addFlashAttribute메소드를 이용해서 저장한다.
+- 리다이렉트 후 조회를 하면 바로 정보는 삭제된다.
+
+3) org.springframework.web.context.request.RequestContextHolder
+- 일반 빈에서 HttpServletRequest, HttpServletResponse, HttpSession 등을 사용할 수 있도록 한다.
+- 해당 객체를 일반 빈에서 사용하게 되면, Web에 종속적이 될 수 있다.
+
+4) org.springframework.web.multipart.MultipartResolver
+멀티파트 파일 업로드를 처리하는 전략
 
 2. 요청 전달
-HandlerExcecutionChain 발견했냐 안했나 발견 못했으면 에러 400대
+HandlerExcecutionChain 발견했냐 안했나 판단-> 발견 못했으면 에러 400대
 HandlerExcecutionChain 있으면 HandlerAdapter객체가 결정된다
-만약 핸들러어댑터 없으면 서버 잘못 -> 서블릿예외 발생
-
-문제 없으면 요청 잘됨
+만약 핸들러어댑터 없으면 서버 잘못 -> 서블릿예외 발생시킨다.
+문제 없으면 요청 잘됨.
 
 Handler Mapping  디폴트 설정들..
 
-[요청 전달시 사용된 컴포넌트들] - 강의자료
+[요청 전달 시 사용된 컴포넌트]
+1) org.springframework.web.servlet.HandlerMapping
+- HandlerMapping구현체는 어떤 핸들러가 요청을 처리할지에 대한 정보를 알고 있다.
+- 디폴트로 설정되는 있는 핸들러매핑은 BeanNameHandlerMapping과 DefaultAnnotationHandlerMapping 2가지가 설정되어 있다.
+
+2) org.springframework.web.servlet.HandlerExecutionChain
+- HandlerExecutionChain구현체는 실제로 호출된 핸들러에 대한 참조를 가지고 있다.
+- 즉, 무엇이 실행되어야 될지 알고 있는 객체라고 말할 수 있으며, 핸들러 실행전과 실행후에 수행될 HandlerInterceptor도 참조하고 있다.
+
+3) org.springframework.web.servlet.HandlerAdapter
+- 실제 핸들러를 실행하는 역할을 담당한다.
+- 핸들러 어댑터는 선택된 핸들러를 실행하는 방법과 응답을 ModelAndView로 변화하는 방법에 대해 알고 있다.
+- 디폴트로 설정되어 있는 핸들러어댑터는 HttpRequestHandlerAdapter, SimpleControllerHandlerAdapter, AnnotationMethodHanlderAdapter 3가지이다.
+- @RequestMapping과 @Controller 애노테이션을 통해 정의되는 컨트롤러의 경우 DefaultAnnotationHandlerMapping에 의해 핸들러가 결정되고,
+그에 대응되는 AnnotationMethodHandlerAdapter에 의해 호출이 일어난다.
 
 3. 요청 처리
 익스큐선체인 결정되면 사용가능 인터셉터가 있는지 찾아본다
@@ -1124,7 +1159,8 @@ Handler Mapping  디폴트 설정들..
 핸들러 실행 후 리턴값 준
 
 [요청 처리시 사용된 컴포넌트]
-- .ModelAndView
+1) org.springframework.web.servle.ModelAndView
+- ModelAndView는 Controller의 처리 결과를 보여줄 view와 view에서 사용할 값을 전달하는 클래스이다.
 Request에다 값을 넣어서 사용하는 것보다 이 컴포넌트를 쓰는게 바람직.
 
 - .RequestToViewNameTranslate
@@ -1133,13 +1169,23 @@ Request에다 값을 넣어서 사용하는 것보다 이 컴포넌트를 쓰는
  4. 예외처리
 
  [예외 처리시 사용된 컴포넌트]
+1) org.springframework.web.servlet.handlerexceptionresolver
+- 기본적으로 DispatcherServlet이 DefaultHandlerExceptionResolver를 등록한다.
+- HandlerExceptionResolver는 예외가 던져졌을 때 어떤 핸들러를 실행할 것인지에 대한 정보를 제공한다.
 
 5. 뷰 렌더링 과정
 - View Resolver
 
+[뷰 렌더링 과정시 사용된 컴포넌트]
+
+1) org.springframework.web.servlet.ViewResolver
+- 컨트롤러가 리턴한 뷰 이름을 참고해서 적절한 뷰 오브젝트를 찾아주는 로직을 가진 전략 오프젝트이다.
+- 뷰의 종류에 따라 적절한 뷰 리졸버를 추가로 설정해줄 수 있다.
+
 6. 요청 처리 종료
 
 
+(정리하자면)
 - Handler Mapping
 어떤 요청에 어떤 컨트롤러가 동작할지 .xml이나 .java에 어노테이션으로 설정한 것을
 핸들러 맵핑 객체들 생성되면서 관리하는 역할 .
@@ -1154,11 +1200,12 @@ Request에다 값을 넣어서 사용하는 것보다 이 컴포넌트를 쓰는
 
 #### Spring MVC 실습
 
+(실습 내용)
 웹브라우저에게 url 요청 후  - > 2개 값 입력 받을 수 있는 창& 버튼 있는 화면 출력
 -> 웹브라우저에 2개 값 입력 하고 버튼 클릭하면 어쩌구 URL로 입력값 post로 서버에게 보내고
 -> 서버는 2개 값 더 해서 결과값 JSP에게 request scope로 전달해서 출력하긔
 
-[pom.xml 설정 하기]
+1. [pom.xml 설정 하기]
 plugins : jdk 1.8
 라이브러리 : jstl, jsp, servlet
 spring-context
@@ -1169,17 +1216,16 @@ webmvc
 
 얘도 서블릿이기 때문에 web.xml 파일에 설정 할 수 있다.
 두 가지 방법이 있다.
-1. web.xml 파일에 dispatcherServlet 설정하는 방법
+1) web.xml 파일에 dispatcherServlet 설정하는 방법
 어떤 일을 할 지 알려주는 것...
 java config sprin g설정 읽어 들이도록 . javaConfig 를 읽어온다.
 urlpatten 에 맵핑할 url 넣으면 servlet-name 과 같은 name으로 매핑되어있는 servlet -class가 실행 된다 : 지난 강의 참조하기
 슬러시를 쓰면 슬러시덕분에 모든 요청을 받을 수 있다.
 
-2.  WebApplicationInitializer 를 이용해서 구현하기 : 수업에서 자세히 안다룸.
-
+2)  WebApplicationInitializer 를 이용해서 구현하기 : 수업에서 자세히 안다룸.
 단점 : 첫 구동이 오래 걸릴 수 있다.
 
-<쓰이는 어노테이션들>
+[쓰이는 어노테이션들]
 - @Configuration
 이 어노테이션을 통해 자바 config 파일이구나 알려주는 역할 이다.
 
@@ -1202,10 +1248,9 @@ Spring MVC에서 핸들러  = 컨틀로러 찾아야 하는데 componentScan 어
 이거 붙여야 컨트롤러인줄 안다. 맵핑 위해 @RequestMapping 서블릿 url지정시 @Servlet 관련 어노테이션
 붙이는거랑 같다.
 
-
 - addResourceHandlers
 
-반드시 필요한 부분
+* 반드시 필요한 부분
 registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
                       ----"/css/**"-------이렇게 들어오는 url요청은 ------"/css/----- 여기서 찾아요 라는 뜻임
 
@@ -1216,7 +1261,7 @@ registry.addViewController("/").setViewName("main");
 리졸버  - 뷰 그릴수 있게 찾아주기 ?
 어쩌구저쩌구 - ResourceViewResolver(){
    InternalResourceViewResolver resolver  = new Internal ResourceViewResolver();
-   resolver.setPrefix("/WEB-INF/views/"); // .setViewName("main") "main" 앞에 "/WEB-INF/views/" (찾는 거 해당 경로) 붙이기 
+   resolver.setPrefix("/WEB-INF/views/"); // .setViewName("main") "main" 앞에 "/WEB-INF/views/" (찾는 거 해당 경로) 붙이기
    resolver.setSuffix(".jsp")// .setViewName("main") "main" 뒤에 ".jsp" 붙d여서 찾을 수 있도록
 }
 
@@ -1230,11 +1275,19 @@ init-param 부분에서 앞서 webMvcContextConfiguration파일로 설정 잡아
 어쩌구-ApplicationConfiguration 이건 beans공장
 
 
+[Controller 작성 실습]
 
+controller 클래스에 꼭 @Controller 어노테이션 붙혀주기
+@GetMapping(path  = "/dfdf") : get 방식으로 들어 올때 쓰는 어노테이션 / @PostMapping(path  = "/dfdf") : post 방식으로 들어올때 쓰는 어노테이션 .
 
+(다양한 Controller 메소드 인수 타입 / 어노테이션)
 
+@PathVariable  : 패스에서 받은 변수명을 받기 위하 ㄴplace holder가 필요함.
+주의할 점 : 넣어준 이름과 파라미터명 잘 매치 되게 해줘야 스프링이 잘 넣어준다.
 
+modelMap. 쓰면 requestScope에 알아서 넣어준다. 스프링의 다양한 객체들을 이용해보자
 
++) EL 표기법은 2.3버전땐 필수가 아니었다. web 버전 3.1로 했는지 체크하기
 
 
 
