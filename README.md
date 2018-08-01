@@ -1289,6 +1289,97 @@ modelMap. 쓰면 requestScope에 알아서 넣어준다. 스프링의 다양한 
 
 +) EL 표기법은 2.3버전땐 필수가 아니었다. web 버전 3.1로 했는지 체크하기
 
+@RquestMapping @GetMapping @PostMapping ..
+매핑하는 다양한 방식이 있다.
+
+@RequestParam 통해서 하나 하나 받는거 말고
+@ModelAttribute 어노테이션 붙여서 한꺼번에 가방처럼 들고다니는 DTO 를 만들어준다.
+
+스프링이 알아서 넣기 때문에 form에서 쓴 name과 dto에서 쓴 name이 반드시 같아야 한다.
+private 로 선언했는데 스프링이 접근하기 때문에 게터세터를 써줘야한다.
++) toString 을 쓰면 이름표처럼 뭐가 있는지 한번에 출력되게 하면 편하다 .
+
+
+Controller 실습 3번
+@GetMapping("/goods/{id}") -> {id} : 이 부분이 Path Variable
+= url 요청이 왔을때 {id} 라는 path Variable로 받겠다.
+
+
+*180731*
+#### 레이어드 아키텍처
+url 은 다르지만 웹페이지 요소 , 구성이 겹치는 부분이 있다면
+Controller에서 중복되는 부분을 처리하려면?
+
+1. 별도의 객체로 분리한다. 2. 별도의 메소드로 분리한다.
+
+서비스 객체는 업무와 관련된 객체 = 비지니스 객체
+
+서비스 객체란 ?
+비지니스 로직을 수항해는 메소드를 가지고 있는 객체
+1개의 비지니스 로직 -> 1개의 트랜잭션 동작
+서비스 객체마다 비지니스 메서드를 가지고 있다.
+서비스 객체 는 맞게 비지니스 메서드를 여러개 교차 사용 한다.
+하나의 비지니스 메서드는 트젝 단위로 처리.
+
+트랜잭션이란?
+하나의 논리적인 작업을 의미.
+[트랜잭션 특징 4가지]
+1. 원자성
+전체가 성공하거나 / 전체가 실패하는 것 .
+ex) '출금' 기능 안에 작업들을 각각 볼 수 없고 , 이 안의 작업들을 모두 완료 해야 한 개의 기능으로 보는 것.
++) rollback : 오류 났을 때 앞에 수행 된 작업들을 원래대로 모두 복원 시키는 것.
++) commit : n번 작업까지 모두 성공했을 때만 정보를 모두 반영하는 것. 작업 반.
+롤백 하거나 커밋 하게 되면 하나의 트잭 처리가 됐다고 하는 것이당 .
+
+2. 일관성
+트랜잭션의 작업 처리 결과가 일관성 있게 유지 되는 것.
+
+3. 독립성
+둘 이상의 트젝이 동시에 진행 되고 있을 때 어느 하나의 트젝이라도
+다른 트잭 연산에 끼어 들 수 없는 특성. 하나의 특정 트젝이 완료 될때까지
+다른 트젝이 사용 할 수 없다.
+
+4. 지속성
+트젝이 성공적으로 완료 됐을 때 , 결과가 영구적으로 유지 되는 특성을 지속성이라한다.
+
+-JDBC 프로그래밍에서 트랜잭션 처리 방법-
+DB 연결 된 후 connection 객체의 setAutoCommit메서드를 false로 파라미터 지정하고
+커밋 조건 만족 후 커밋 되도록 조건들을 작성 해준다.
+true면 자동 커밋 된다.
+
+-스프링에서 트젝 활용-
+@EnableTransactionMAnagement 이 어노테이션을 쓴다.
+특정 트잭매니저를 사용하려면
+TransactionManagementConfigurer를 Java Config파일에서 구현하고 원하는 트젝 매니저를 리턴하도록 한다.
+또는 , 특정 트젝 매니저 객체 생성 시, @Primary 어노테이션 지정.
+
+
+왜 레이어드 아키텍처가 사용될까?
+
+<각 레이어의 구성요소>
+
+Presentatino Layer : 컨트롤러 객체 동작 : 보여지는 걸 구현하는 레이어. 지금 과정에선 web
+Service Layer : 서비스 객체 동작
+Repository Layer : DAO 객체
+
+무슨 로직을 어디 레이어에 놓아야 하나 .. 앞으로 고민하게 될 것.
+
+*설정의 분리하기 :
+Spring 설정 파일을 프리젠테이션 레이어쪽과 나머지를 분리할 수 있습니다.
+
+web.xml 파일에서 프리젠테이션 레이어에 대한 스프링 설정은 DispathcerServlet이 읽도록 하고, 그 외의 설정은 ContextLoaderListener를 통해서 읽도록 합니다.
+
+DispatcherServlet을 경우에 따라서 2개 이상 설정할 수 있는데 이 경우에는 각각의 DispathcerServlet의 ApplicationContext가 각각 독립적이기 때문에 각각의 설정 파일에서 생성한 빈을 서로 사용할 수 없습니다.
+
+위의 경우와 같이 동시에 필요한 빈은 ContextLoaderListener를 사용함으로써 공통으로 사용하게 할 수 있습니다.
+
+ContextLoaderListener와 DispatcherServlet은 각각 ApplicationContext를 생성하는데, ContextLoaderListener가 생성하는 ApplicationContext가 root컨텍스트가 되고 DispatcherServlet이 생성한 인스턴스는 root컨텍스트를 부모로 하는 자식 컨텍스트가 됩니다.
+
+참고로, 자식 컨텍스트들은 root컨텍스트의 설정 빈을 사용할 수 있습니다.
+
+[실습]
+
+
 
 
 
