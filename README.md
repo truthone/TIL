@@ -1379,6 +1379,9 @@ ContextLoaderListener와 DispatcherServlet은 각각 ApplicationContext를 생�
 
 [실습]
 
+pom.xml 설정시 dynamic web 3.1로 수정안된다 어쩌구
+오류 수정 참고 url : http://lng1982.tistory.com/199
+
 
 
 
