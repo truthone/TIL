@@ -1382,6 +1382,24 @@ ContextLoaderListener와 DispatcherServlet은 각각 ApplicationContext를 생�
 pom.xml 설정시 dynamic web 3.1로 수정안된다 어쩌구
 오류 수정 참고 url : http://lng1982.tistory.com/199
 
+web.xml 설정 설명 - 강의 두번째 꺼 12:49
+
+쿼리에 'limit' 은 어디 일정 부분을 가져오는 쿼리문(?)
+Dao에는 @repository 라는 어노테이션을 붙여주자.
+
+어떤 메서드 구현 하고 나서 바로 테스트를 해주는 것이 중요하다.
+근데 사실 개발하는 곳에 main 메서드를 여러개 넣어서 막 하는 것은 좋지않다.
+JUnit 같은 단위 테스를 할 수 있는 도구를 공부해서 이용해보자.
+
+문자 한글이여서 insert 안 될 때
+참조 : http://ezsnote.tistory.com/entry/mysql-%EB%AC%B8%EC%9E%90%EC%85%8B%EC%9D%B4-%EC%95%88%EB%A7%9E%EC%95%84%EC%84%9C-insert-%EC%95%88%EB%90%98%EB%8A%94-%EA%B2%BD%EC%9A%B0-UTF-8
+방법 1) 테이블 생성시 character set utf8 해주자.
+방법 2) 기존 테이블의 charset을 바꿔주자.
+참조 : http://archmond.net/?p=7659
+
+방법 3) mysql 설정 자체를 바꾸자.
+
+
 
 
 
