@@ -1406,8 +1406,46 @@ JUnit 같은 단위 테스를 할 수 있는 도구를 공부해서 이용해보
 +) 인터페이스란 
 
 
+####Restcontroller
 
+Spring MVC를 이용해 Rest API작성하는 방법 .
 
+Rest API / Web API / @RestController / MessageConvertor
+
+@RestController
+- Spring 4에서 Rest API 나 Web API를 개발하기 위해 등장한 어노테이션.
+- 이전 버전의 @Controller랑 @ResponseBody 를 가지고 있다.
+
+JSON 객체 받은 걸 해석해주거나 보낼때도 작성해서 보내는 역할을 한다...
+jackson 을 쓰기 때문에 꼭 ! jackson 라이브러리를 추가해줘야 오류가 안난다.
+
+MessageConvertor
+- 자바 객체 & HTTP요청/응답 바디를 변환한다.
+- @ResponseBody , @RequestBody
+- @EnableWebMvc로 인한 기본 설정
+- WebMvcConfigurationSupport를 사용해서 Spring MVC 구현
+- Default MessageConvertor를 제공한다.
+- 링크 바로가기 의 addDefaultHttpMessageConverters메소드 항목 참조
+
+++++ Messageconvertor 종류 ++++++
+ByteArrayHttpMessageConverter
+StringHttpMessageConverter
+ResourceHttpMessageConverter
+SourceHttpMessageConverter
+FormHttpMessageConverter
+Jaxb2RootElementHttpMessageConverter
+MappingJackson2HttpMessageConverter
+MappingJacksonHttpMessageConverter
+AtomFeedHttpMessageConverter
+RssChannelHttpMessageConverter
+
+JSON 응답하기
+- Controller의 메소드에선 JSON으로 변환될 객체를 반환한다.
+- jackson라이브러리를 추가하면 JSON으로 변환하는 MessageConvervor가 사용되도록
+@EnableWebMvc에서 기본으로 설정되어 있다.
+- jackson 라이브러리를 추가하지 않으면 JSON메세지로 변환할 수 없어서 500대 오류가 발생한다.
+- 사용자가 임의로 Messageconverter를 사용하도록 하려면 WebMvcConfiguerAdapter의
+confitereMessageConverters메서도를 오버라이딩 하도록 한다.
 
 
 
