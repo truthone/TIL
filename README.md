@@ -1448,6 +1448,9 @@ JSON 응답하기
 confitereMessageConverters메서도를 오버라이딩 하도록 한다.
 
 
+#### pj03 진행 하면서 이슈 
+- 배포경로 -워크스페이스 경로 문제
+
 
 
 
