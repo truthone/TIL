@@ -747,19 +747,18 @@ DOM API를 이용하여 쉽게 html element를 찾을 수 있다.
 
 
 *180715*
- #### 자바스크립트 배열
-
-배열의 유용한 메서드들
-.indexOf()
+### 자바스크립트 배열
+#### 배열의 유용한 메서드들
+- .indexOf()
 문자열 있나도 됨
 결과는 -1보다 크나 작나로 해서 판단.
-.join()
-.concat() : 원래 배열은 그대로 있고 합쳐진 새로운 배열을 반환한다.
-.join
-.slice
+
+- .join()
+- .concat() : 원래 배열은 그대로 있고 합쳐진 새로운 배열을 반환한다.
+- .join
+- .slice
 
 ...
-
 
 원래 배열을 반환할 수도 있고 새로운 배열을 만들수도 있다.
 원래 배열이 변경 될 수 있으니 조심하자.
@@ -773,12 +772,12 @@ DOM API를 이용하여 쉽게 html element를 찾을 수 있다.
 
 *반환값이 중요하다. 새로운 배열을 반환하는지 기존의 배열을 반환하는지*
 
-#### 자바스크립트 객체
+### 자바스크립트 객체
 
-자바스크립트 객체 : key + value 로 이루어진 'dictionary자료구조''
+자바스크립트 객체 : (key + value) 로 이루어진 'dictionary 자료구조'
 
-배열은 순서가 있는 리스트
-객체는 키값을 이용한 자료구조
+배열 : 순서가 있는 리스트.
+객체 :  키값을 이용한 자료구조
 
 [객체 탐색]
 /* var obj = {key : value} */
@@ -788,57 +787,52 @@ obj.key || obj.["key"]
 - for-in 문을 객체값 찾는데 많이 쓴다.
 - object.keys 랑 forEach 이용해서 하는 방법도 있다.
 
+### DOM API
 #### DOM node 생성 & 추가
-
 
 firstChild : 공백까지 노드로 친다.
 firstElementchild : 이걸 이용하자 --...
-
 
 #### 문자열기반으로  DOM 조작하기
 
 tip : 크롬 개발도구 elemnet 클릭 후 콘솔창에 $0하면 클릭한 element가리킴.
 
-
 노드 . closest("section") : 이 노드의 섹션 태그를 찾아준다. 이러면 계속 parentnode 쓸 필요 없다.
 
-
-#### ajax + 크롬개발자도구로 디버깅 보기
+### ajax + 크롬개발자도구로 디버깅 보기
 responseText로 온 문자열은 브라우저에 표시하기 위해서 jsonParse를 이용해 객체화 시켜 출력되게 한다.
 
 +) 동영상보고 비동기 통신 과정 정리해보긔
 +) JSONP
 
+*tip : 크롬개발자 도구에서 녹화기능은 반응속도를 체크할 때 좋다. *
 
-크롬개발자 도구에서 녹화기능은 반응속도를 체크할 때 좋다. 
+### 웹 애니메이션의 이해
 
+간단한 방식은 css3의 transform과 transition 속성을 이용하는 것이다.
 
-*180719*
-#### 웹 애니메이션의 이해
+- FPS : 1초에 화면에 표현 할 수 있는 정지화면(frame) 수.  16밀리세컨드 간격이 적당하다. (1000/16)
 
-간단한 방식은 css3dml transform과 transition 속성을 이용하는 것이다.
-
-- FPS : 1초에 화면에 표현 할 수 있는 정지화면(frame) 수.16밀리세컨드 간격이 적당하다. (1000/16)
-
-간단하고 규치적인 것 ->css로
+간단하고 규칙적인 것 ->css로.
 세밀한 조정 -> 추가로 자바스크립 이용.
 
-setInterval (이거가지고 애니메이션 구현은 잘 안함)
-: 내가 준 시간에 따라 실행
-단점 : 이벤트 콜백이 지연되어 지연문제가 발생 할 수 있다.
+- setInterval (이거 가지고 애니메이션 구현은 잘 안함)
+: 내가 준 시간에 따라 실행.
+단점 -> 이벤트 콜백이 지연되어 지연문제가 발생 할 수 있다.
 
-setTimeout
-: 재귀적으로 호출한다. 끝난 다음에 또 부르고 끝난 다음에 또 부르고....
-끝난 다음에 실행 되는 것이기 때문에 먹히는 거 없이 (?)  할 수 있지만 지연문제를 간과 할 순 없다.
+- setTimeout
+재귀적으로 호출한다. 끝난 다음에 또 부르고 끝난 다음에 또 부르고....
+끝난 다음에 실행 되는 것이기 때문에 먹히는 거 없이 (?)  할 수 있지만, 지연문제를 간과 할 순 없다.
 timeout을 조절해 컨트롤 할 수 있다는 것이 setInterval과 다르다.
 
+
 그렇다면 이거 말고 많이 사용하는 것은 ?
--> requestAnimationFrame
+-> #### requestAnimationFrame
 
 #### requestAnimationFrame활용
-애니메이션을 위한 전용 함수.
-함수탈출조건으로 컨트롤. 
-16 밀리세컨드 이하 간격으론 권장하지 않는다. 
+- 애니메이션을 위한 전용 함수.
+- 함수 탈출 조건으로 컨트롤. 
+- 16 밀리세컨드 이하 간격으론 권장하지 않는다. 
 
 #### CSS3 transition 활용 
 모든 css속성을 애니메이션과 함께 1초동안 변화 시키자. 
@@ -848,55 +842,56 @@ css transition transform .. 이 빠르다.
 
 
 *180726*
-# QnA day
+### QnA day
 
-- 상대적 링크 : local8080.. 이거 말고 ./ 으로
-- click.js todo || doing if문 리팩토링
-- main문 css
+- 상대적 링크 : local8080.. 이거 말고->  ./ 으로 사용하자. 배포시 사용자의 port가 다 다를 수 있기 때문이다. 
+- click.js 의 todo || doing if문 리팩토링
+- main문 css 가운데로 하기 
 
-HTML5형식으로 작성하길 권장 - 그럼 독타입 선언안해도됨.
+- HTML5형식으로 작성하길 권장 -> 그럼 DOCTYPE 선언 안 해도됨.
 
-'지킬' 이용해서 깃헙에 정적 블로그 만들기
+- '지킬' 이용해서 깃헙에 정적 블로그 만들기
 
-면접때 ex: sping으로 Vue 나.. 이런거 이용하지 않고  순수 자바스크립트로 뭘 만들어 봤다.
+면접 때 ex: sping으로 Vue 나.. 이런거 이용하지 않고  순수 자바스크립트로 뭘 만들어 봤다.
 이런거 배웠고 앞으로는 이런 걸 응용해서 어떤 걸 만들고 싶다
+일일 커밋 매일하기. 부코 강의에 나오는 코드는 깃헙에 올려도 괜춘 !
 
-일일 커밋 매일하긔 . 부코 강의에 나오는 코드는 깃헙에 올려도 괜춘 !
 마루180
 아산나눔재단 
 
 
 *180728*
 #### DOMContentLoaded
-DOM ContentLoaded : DOM Tree를 먼저 모두 로드됐을 때를 알린다. document
-Load :모든 이벤트들 .. 모두 로드 했을 때 . window
+- DOM ContentLoaded : DOM Tree를 먼저 모두 로드 됐을 때를 알린다. document
+- Load :모든 이벤트들 .. 모두 로드 했을 때 . window
 
-보통 html, css... 등 브라우저 렌더링 작업이 다 끝나고 나서 이벤트실행 하고 노드변경 찾는 등의 JS는
-html 맨 아래 쪽에 위치 시킨다. 하지만 이렇게 해도 DOMTree가 다 구성 되기 전에 JS 실행 되는 경우가 있다.
+보통 html, css... 등 브라우저 렌더링 작업이 다 끝나고 나서 이벤트 실행하고 노드변경 찾는 등의 JS는 html 맨 아래 쪽에 위치 시킨다. 
+하지만 이렇게 해도 DOMTree가 다 구성 되기 전에 JS 실행 되는 경우가 있다.
 DOMContentLoaded 이벤트는 DOM Tree가 모두 로드 되어 구성됐을 때를 알린다.
-DOMContentLoaded 이벤트안에 DOM Tree 모두 로드 후 실행 시킬 일들을 써주면 좋다. (노드 찾기 , 구성등?)
+때문에 DOMContentLoaded 이벤트 안에 DOM Tree 모두 로드 후 실행 시킬 일들을 써주면 좋다. (노드 찾기 , 구성등..)
 
-#### Event delegation (기법) - 부모 엘리먼트에 위임한다.
-list가 각자 UI에 각각 비슷한 이벤트를 걸어 처리해야 한다면 ?
-이벤트 등록을 효율적으로 어떻게 할까 ? for문을/?
+#### Event delegation (기법) : 부모 엘리먼트에 위임한다.
+list가 각자 UI에 각각 비슷한 이벤트를 걸어 처리해야 한다면 어떻게 해야할까 ?
+이벤트 등록을 효율적으로 어떻게 할까 ? for문을 쓸까?
 
 맨 상위 엘리먼트에 이벤트 리스너 등록하면 하위 엘리먼트 클릭해도 된다!
+
 +) firstChild / firstElementChild 차이
 firstElementchild 공백 확인
 
 브라우저가 기억해야 할 이벤트 핸들러가 많이지면 메모리사용이 비효율적으로 된다.
 
-그럼 어케 ? target정보를 이용하자
+그럼 어떻게 ? target정보를 이용하자
 target : 내가 클릭한 지점 정보 .
 
-- Bubbling : 하위 엘리먼트를 클릭했더라도 상위엘리먼트 쭉쭉 검색 올라가면서 그중에 등록한 이벤트 리스너가 있다면 실행된다.
+- Bubbling : 하위 엘리먼트를 클릭 했더라도 상위 엘리먼트 쭉쭉 검색 올라가면서 그 중에 등록한 이벤트 리스너가 있다면 실행된다.
 기본적으로 버블링 순서로 이벤트가 발생된다.
 
 - Capturing : 버블링과 반대로 이벤트 발생.
-캡처링 단계에서 이벤트 발생 시키고 싶다면 addEventListener 메서드 3번째 인자값 : true 지정.
+캡처링으로 이벤트 발생 시키고 싶다면 addEventListener 메서드 3번째 인자값 : true 지정.
 
-[발생 순서] ex) Element 1 > Element 2 > Element 3 이라면,
-캡처링 : 1 -> 2 -> 3 / 버블링 : 3 -> 2-> 1
+[발생 순서] 
+ex) Element 1 > Element 2 > Element 3 이라면, 캡처링 : 1 -> 2 -> 3 / 버블링 : 3 -> 2-> 1
 
 <예제 코드>
 ul.addEventListener("click", function(evt){
@@ -908,7 +903,7 @@ ul.addEventListener("click", function(evt){
 
 })
 
-만약 이미지들 사이 패딩을 클릭해도 이미지 정보가 나오게 하고 싶다면. ,
+만약 이미지들 사이 패딩을 클릭해도 이미지 정보가 나오게 하고 싶다면 ,
 
 <예제 코드>
 ul.addEventListener("click", function(evt){
@@ -924,27 +919,25 @@ ul.addEventListener("click", function(evt){
 
 
 #### HTML templating 작업
-서버롭터 받은 데이터를 화면에 반영해야 할 때가 많은데, HTML 형태는 그대로인데 데이터만 변경되는 경우는
-어떻게 처리해야 효율적일까?
+서버로부터 받은 데이터를 화면에 반영해야 할 때가 많은데, 
+HTML 형태는 그대로인데 데이터만 변경되는 경우는 어떻게 처리해야 효율적일까?
 
-- HTML templation 이란 ?  HTML과 데이터를 섞어서 표현하는 방법.
+- HTML templation :  HTML과 데이터를 섞어서 표현하는 방법.
 
-
-보통 백엔드에서 데이터조회 후, 그 내용들을 동적으로 HTML로 만들어 클라이언트에 보내준다.
+보통 백엔드에서 데이터 조회 후, 그 내용들을 동적으로 HTML로 만들어 클라이언트에 보내준다.
 회사에서도 동적으로 클라이언트에서 생성할까 서버에서 할까 고민이다..
 
 서버에서 보내준 JSON Data을  HTML Template 에 알맞게 넣어주면 이것이 HTML templating !
 
-
 - String의 replace
-replace() 메서드를 쓴다.
+.replace() 메서드를 쓴다.
 
 +) regular expression 을 쓰면 더 막강해진다.
 
-repalce는 메서드 체이닝 방식으로 호출하면서 풀이할 수 있다.
+repalce는 메서드 체이닝 방식으로 호출하면서 풀이 할 수 있다.
 *메서드 체이닝*
 
-data가 배열형태면 여러개면 , 간단한 반복문 또는 forEach같은 메서드 사용.
+data가 배열 형태로 여러개면 간단한 반복문 또는 forEach같은 메서드 사용.
 
 <예제 코드>
 var data = {
@@ -952,6 +945,7 @@ var data = {
               content : "chicken"
               price : 20000
            };
+           
 var html =
 "<li>
 <h4>{title}</h4>
@@ -967,11 +961,13 @@ html.replace("{title}", data.title)
 
 어떻게 템플릿을 보관 할 수 있을까?
 
-JS를 정적데이터로 html로 넣는 건 좋지않다. 다음 두가지 방법이 있다.
+JS를 정적 데이터로 html로 넣는 건 좋지않다. 다음 두가지 방법이 있다.
+
 1) 서버에 file로 보관헤서 Ajax로 요청 받아온다.
 2) HTML 코드 안에 숨겨둔다
-HTML script태그는 type이 javascript가 아니면 렌더링안하고 무시한다. 이 속성을 이용해 HTML Template을 숨겨둔다.!
-type은 내맘대로 쓰면 된다. 추가로 ES6에의 템플릿 리터럴이라는건 repalce를 안쓰고 편하게 된다..
+
+HTML script태그는 type이 javascript가 아닌건 렌더링 안하고 무시한다. 이 속성을 이용해 type은 내맘대로 쓰고 HTML Template을 숨겨둔다.!
+추가로 ES6에의 템플릿 리터럴이라는건 repalce를 안쓰고 편하게 된다.
 
 <예제 코드>
 
@@ -985,7 +981,6 @@ type은 내맘대로 쓰면 된다. 추가로 ES6에의 템플릿 리터럴이�
   //위에 선언한 JS의 id값을 DOM Api를 이용해 가져올 수 있다.
   //.innerHTML DOM Api를 이용해 데이터를 뽑아오자.
    var html = document.querySelector("#template-list-item").innerHTML
-
 </script>
 
 var data = [
@@ -1019,17 +1014,17 @@ document.querySelector(".content").innerHTML = resultHTML;
 
 *180720*
 
-#### Spring (프레임워크)
+### Spring (프레임워크)
 
 프레임워크 : 반제품 
-모듈화가 잘되있다. 전부 다 알 필요 없고, 필요할 때 필요한 것을 사용하자.
+모듈화가 잘돼있다. 전부 다 알 필요 없고, 필요할 때 필요한 것을 사용하자.
 +) AOP
 
 [스프링 웹 계층]
-spring-web 모듈 : 멀티파트 파일 업로드  / 서블릿 리스너 등/// 
-spring-webmvc 모듈 : 다른 말로 Web-servlet모듈. Spring MVC 및 REST 웹 서비스 구현 .
-spring-websocket 모듈
-spring-webmvc-portlet 모듈
+- spring-web 모듈 : 멀티파트 파일 업로드  / 서블릿 리스너 등/// 
+- spring-webmvc 모듈 : 다른 말로 Web-servlet모듈. Spring MVC 및 REST 웹 서비스 구현 .
+- spring-websocket 모듈
+- spring-webmvc-portlet 모듈
 
 
 [스프링 프레임워크 핵심 개념]
