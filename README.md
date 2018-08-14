@@ -1445,8 +1445,13 @@ confitereMessageConverters메서도를 오버라이딩 하도록 한다.
 
 #### pj03 진행 하면서 이슈 
 - 배포경로 -워크스페이스 경로 문제
-
-
+context path : root 
+웹 어플리케이션 경우 (이 실습 , 이클립스-톰캣 -maven webapp일 경우 ) context path 는 webapp 이다.
+webapp
+  - WEB-INF
+      -jsp  <- 여기에 위치한  .jsp의 경로 작성 해야 할 경우: ./WEB-INF/jsp가 된다. 
+ 
+./ : 상대 root 경로 
 
 
 
