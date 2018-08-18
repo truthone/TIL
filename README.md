@@ -1453,7 +1453,7 @@ webapp
  
 ./ : 상대 root 경로 
 
-- 
+ex) ./서블리url  ./jsp/main.jsp
 
 
 
