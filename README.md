@@ -1469,8 +1469,7 @@ function updateTransition() {
   return el;
 }
 
-var intervalID = window.setInterval(updateTransition, 7000);
-
+var intervalID = window.setInterval(updateTransition, 7000)
 
  
  
