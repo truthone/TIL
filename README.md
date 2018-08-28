@@ -1497,3 +1497,6 @@ MV* / js es5(우리나라 하위버전 있어서 포용해야하기 때문) ,6(e
 
 promise 패턴으로 한게 Fetch API 
 
+hello => () 이거랑 function hello () 똑같은 것.
+.then : 통신이 되면 실행 
+
