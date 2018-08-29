@@ -1472,31 +1472,36 @@ function updateTransition() {
 var intervalID = window.setInterval(updateTransition, 7000);
 
 
-#### spring을 spring boot 2.x
+### spring을 spring boot 2.x 바꾸기
 
+!중요
+-JUnit 이용한 테스트 익히기.
 
-#### FE
-주니어와 시니어의 차이 ?
+### FE
+- 주니어와 시니어의 차이 ?
 1-2명을 이끌면서 유지보수까지 다 고려해서 요구사항을 만들 수 있냐
 구체적으론 서비스 부분을 만들 수 있냐
 javascript를 할 줄 알아야
-FE로 가도 백엔드와 어떻게 통신되는지를 최소한 알아야 한다. 
+FE로 가도 BE와 어떻게 통신되는지를 최소한 알아야 한다. 
 
 MV* : 서로 객체 간의 느슨한 관계를 알아야 ... 객체 지향 프로그래밍 책이 도움이된다 (java)
-FE는 두가지를 잘하면 잘한다 = 중요하다.
+
+FE는 다음 두가지를 잘하면 잘한다 할 수 있다. = 중요하다.
 1) 템플릿 작업을 세련되게 한다.   2) 비동기를 잘 제어 할 수 있다. 
 
-라우팅 - > 히스토리 
+Rounting --> 히스토리 
 
-MV* / js es5(우리나라 하위버전 있어서 포용해야하기 때문) ,6(es2015)/ 비동기/ compoment design / routing
+MV* / js es5(우리나라 하위버전 있어서 포용 해야하기 때문) , es6(es2015)/ 비동기/ compoment design / routing
 ==> 결과적으로 js 의 이해가 중요하다. 
 
-한 개를 다른 패턴으로 짜기 -> 깊게 개발.. 
+한 개를 다른 패턴으로 바꿔보면서 깊게 개발. 
 
-백엔드는 잘 나눠져있는데 , 프론트엔드는 프레임워크가 없으면 가이드라인이 없어서 모듈나누기가 힘듬.
+백엔드는 잘 나눠져있는데(스프링..) , 프론트엔드는 프레임워크가 없으면 가이드라인이 없어서 모듈나누기가 힘듬.
 
-promise 패턴으로 한게 Fetch API 
+### 오늘의 실습 : Fetch API를 이요해서 templating 작업하기.
+promise 패턴으로 만든 것이 Fetch API.
 
 hello => () 이거랑 function hello () 똑같은 것.
+
 .then : 통신이 되면 실행 
 
