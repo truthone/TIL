@@ -1472,12 +1472,12 @@ function updateTransition() {
 var intervalID = window.setInterval(updateTransition, 7000);
 
 
-### spring을 spring boot 2.x 바꾸기
+### 오프라인 강의 - BE : spring을 spring boot 2.x 바꾸기
 
 !중요
 -JUnit 이용한 테스트 익히기.
 
-### FE
+### 오프라인 강의 - FE
 - 주니어와 시니어의 차이 ?
 1-2명을 이끌면서 유지보수까지 다 고려해서 요구사항을 만들 수 있냐
 구체적으론 서비스 부분을 만들 수 있냐
