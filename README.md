@@ -790,14 +790,14 @@ obj.key || obj.["key"]
 ### DOM API
 #### DOM node 생성 & 추가
 
-firstChild : 공백까지 노드로 친다.
-firstElementchild : 이걸 이용하자 --...
+- firstChild : 공백까지 노드로 인식한다.
+- firstElementchild : 이걸 이용하자 --...
 
-#### 문자열기반으로  DOM 조작하기
+#### 문자열기반으로 DOM 조작하기
 
-tip : 크롬 개발도구 elemnet 클릭 후 콘솔창에 $0하면 클릭한 element가리킴.
+tip : 크롬 개발도구 elemnet 클릭 후 콘솔창에 $0쓰면 클릭한 element가리킴.
 
-노드 . closest("section") : 이 노드의 섹션 태그를 찾아준다. 이러면 계속 parentnode 쓸 필요 없다.
+- 노드 . closest("section") : 이 노드의 섹션 태그를 찾아준다. 이러면 계속 parentnode 쓸 필요 없다.
 
 ### ajax + 크롬개발자도구로 디버깅 보기
 responseText로 온 문자열은 브라우저에 표시하기 위해서 jsonParse를 이용해 객체화 시켜 출력되게 한다.
@@ -827,7 +827,7 @@ timeout을 조절해 컨트롤 할 수 있다는 것이 setInterval과 다르다
 
 
 그렇다면 이거 말고 많이 사용하는 것은 ?
--> #### requestAnimationFrame
+#### requestAnimationFrame
 
 #### requestAnimationFrame활용
 - 애니메이션을 위한 전용 함수.
@@ -836,15 +836,15 @@ timeout을 조절해 컨트롤 할 수 있다는 것이 setInterval과 다르다
 
 #### CSS3 transition 활용 
 모든 css속성을 애니메이션과 함께 1초동안 변화 시키자. 
-css transition transform .. 이 빠르다. 
+css / transition / transform .. 이 빠르다. 
 
 +) vendor prefix
 
 
 *180726*
-### QnA day
+#### QnA day
 
-- 상대적 링크 : local8080.. 이거 말고->  ./ 으로 사용하자. 배포시 사용자의 port가 다 다를 수 있기 때문이다. 
+- 상대적 링크 : local8080.. 이거 말고->  ./ 으로 사용하자. 배포시 사용자의 port가 사용자마다 다를 수 있기 때문이다. 
 - click.js 의 todo || doing if문 리팩토링
 - main문 css 가운데로 하기 
 
@@ -861,16 +861,16 @@ css transition transform .. 이 빠르다.
 
 
 *180728*
-#### DOMContentLoaded
+### DOMContentLoaded
 - DOM ContentLoaded : DOM Tree를 먼저 모두 로드 됐을 때를 알린다. document
 - Load :모든 이벤트들 .. 모두 로드 했을 때 . window
 
-보통 html, css... 등 브라우저 렌더링 작업이 다 끝나고 나서 이벤트 실행하고 노드변경 찾는 등의 JS는 html 맨 아래 쪽에 위치 시킨다. 
-하지만 이렇게 해도 DOMTree가 다 구성 되기 전에 JS 실행 되는 경우가 있다.
+보통 html, css... 등 브라우저 렌더링 작업이 모두 끝난 후 이벤트 실행, 노드변경 찾는 등의 JS는 html 맨 아래 쪽에 위치 시킨다. 
+하지만 이렇게 해도 DOMTree가 전부 구성 되기 전에 JS 실행 되는 경우가 있다.
 DOMContentLoaded 이벤트는 DOM Tree가 모두 로드 되어 구성됐을 때를 알린다.
 때문에 DOMContentLoaded 이벤트 안에 DOM Tree 모두 로드 후 실행 시킬 일들을 써주면 좋다. (노드 찾기 , 구성등..)
 
-#### Event delegation (기법) : 부모 엘리먼트에 위임한다.
+### Event delegation (기법) : 부모 엘리먼트에 위임한다.
 list가 각자 UI에 각각 비슷한 이벤트를 걸어 처리해야 한다면 어떻게 해야할까 ?
 이벤트 등록을 효율적으로 어떻게 할까 ? for문을 쓸까?
 
