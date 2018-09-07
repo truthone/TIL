@@ -1402,7 +1402,7 @@ JUnit 같은 단위 테스를 할 수 있는 도구를 공부해서 이용해보
 +) 인터페이스란 
 
 
-####Restcontroller
+#### Restcontroller
 
 Spring MVC를 이용해 Rest API작성하는 방법 .
 
@@ -1505,4 +1505,10 @@ promise 패턴으로 만든 것이 Fetch API.
 hello => () 이거랑 function hello () 똑같은 것.
 
 .then : 통신이 되면 실행 
+
+#### PJ02 리뷰 + 공뷰
+- final 상수와 상수명명법 
+1) final 상수 이름지을 땐 대문자를 쓰고, 두가지 이상 뜻의 결합은 _ 표시를 이용해 표현한다.   
+2) final 변수에 대한 이해 : 내부 로직상 변경 되면 안되는 상수에 final 키워드를 명시한다.  
+final 변수로 선언하고, 변수가 변하게 코딩하여 컴파일하면 오류가 발생한다. 
 
