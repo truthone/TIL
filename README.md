@@ -1475,7 +1475,7 @@ var intervalID = window.setInterval(updateTransition, 7000);
 
 ### 오프라인 강의 - BE : spring을 spring boot 2.x 바꾸기
 
-!중요
+
 -JUnit 이용한 테스트 익히기.
 
 ### 오프라인 강의 - FE
