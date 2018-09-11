@@ -1512,5 +1512,8 @@ hello => () 이거랑 function hello () 똑같은 것.
 2) final 변수에 대한 이해 : 내부 로직상 변경 되면 안되는 상수에 final 키워드를 명시한다.  
 final 변수로 선언하고, 변수가 변하게 코딩하여 컴파일하면 오류가 발생한다. 
 
-ex) public static final int a;
+ex) public static final int a;  
+
+- click.js 수정 
+TODO -> DOING -> DONE 한번에 되도록 바인딩하기 ?
 
