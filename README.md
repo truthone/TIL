@@ -1516,4 +1516,4 @@ ex) public static final int a;
 
 - click.js 수정 
 TODO -> DOING -> DONE 한번에 되도록 바인딩하기 ?
-
+todo 에서 done 으로 바로 되도록 바인딩 하라는건가? 
