@@ -744,8 +744,6 @@ DOM API를 이용하여 쉽게 html element를 찾을 수 있다.
 - AJAX(XMLHttpRequest 통신) : 비동기 통신
 
 
-
-
 *180715*
 ### 자바스크립트 배열
 #### 배열의 유용한 메서드들
