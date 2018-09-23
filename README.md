@@ -1514,4 +1514,19 @@ ex) public static final int a;
 
 - click.js 수정 
 TODO -> DOING -> DONE 한번에 되도록 바인딩하기 ?
-todo 에서 done 으로 바로 되도록 바인딩 하라는건가? 
+todo 에서 done 으로 바로 되도록 바인딩 하라는건가?
+
+todo -> doing , doing -> done 은 ok 
+하지만 todo -> doing -> done이 되도록. 
+
+동작 작업  구조화 
+
+1. type 이동에 대한 이벤트가 발생한다.
+2. 해당 todo를 서버로 전송한다. 
+3. 서버에서는 update 작업을 하고 "\success"코드를 보낸다. 
+4. 코드를 받아 DOM을 이동시킨다. 
+5. 이동시킨 DOM에 event를 바인딩 해준다. -> 이부분 구현이 필요한듯!
+
+
+
+
