@@ -1529,3 +1529,7 @@ todo -> doing , doing -> done 은 ok
 
 ---> 리다이렉트 안된 페이지 안에서 todo -> doing 하고 옮겨진 doing을 done으로도 옮겨지게 하라는 뜻인듯 
 
+---
+#### 크롬디버깅 
+
+
