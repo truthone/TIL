@@ -1532,4 +1532,7 @@ todo -> doing , doing -> done 은 ok
 ---
 #### 자바스크립트 디버깅 
 
+1) 크롬 개발자 도구 
+Capture screenshot 
+
 
