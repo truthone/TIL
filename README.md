@@ -1527,12 +1527,17 @@ todo -> doing , doing -> done 은 ok
 4. 코드를 받아 DOM을 이동시킨다. 
 5. 이동시킨 DOM에 event를 바인딩 해준다. -> 이부분 구현이 필요한듯!
 
----> 리다이렉트 안된 페이지 안에서 todo -> doing 하고 옮겨진 doing을 done으로도 옮겨지게 하라는 뜻인듯 
+--> 리다이렉트 안된 페이지 안에서 todo -> doing 하고 옮겨진 doing을 done으로도 옮겨지게 하라는 뜻인듯 
+[click.js 해결 ]
+1) 시작 섹션에서 이 node를 삭제하고 -> 2) type (내 코드에선 class)를 수정 한뒤에!! -> 3) 다음 섹션에 appendchild하기
+-> 4) 업데이트 할 type명으로 바꿔서 -> 5) ajax에 type 보내기...
 
----
+: 2)번을 추가해서 해결! --> 자바스크립트느 절차지향적? 어떻게 실행되는가 공부하기.
+
 #### 자바스크립트 디버깅 
 
 1) 크롬 개발자 도구 
-Capture screenshot 
+break point 이용하자 
+
 
 
