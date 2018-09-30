@@ -1509,7 +1509,6 @@ hello => () 이거랑 function hello () 똑같은 것.
 1) final 상수 이름지을 땐 대문자를 쓰고, 두가지 이상 뜻의 결합은 _ 표시를 이용해 표현한다.   
 2) final 변수에 대한 이해 : 내부 로직상 변경 되면 안되는 상수에 final 키워드를 명시한다.  
 final 변수로 선언하고, 변수가 변하게 코딩하여 컴파일하면 오류가 발생한다. 
-
 ex) public static final int a;  
 
 - click.js 수정 
@@ -1519,25 +1518,40 @@ todo 에서 done 으로 바로 되도록 바인딩 하라는건가?
 todo -> doing , doing -> done 은 ok 
 하지만 todo -> doing -> done이 되도록. 
 
-동작 작업  구조화 
-
+[동작 작업 구조화] 
 1. type 이동에 대한 이벤트가 발생한다.
 2. 해당 todo를 서버로 전송한다. 
 3. 서버에서는 update 작업을 하고 "\success"코드를 보낸다. 
 4. 코드를 받아 DOM을 이동시킨다. 
-5. 이동시킨 DOM에 event를 바인딩 해준다. -> 이부분 구현이 필요한듯!
+5. 이동시킨 DOM에 event를 바인딩 해준다. 
 
---> 리다이렉트 안된 페이지 안에서 todo -> doing 하고 옮겨진 doing을 done으로도 옮겨지게 하라는 뜻인듯 
-[click.js 해결 ]
-1) 시작 섹션에서 이 node를 삭제하고 -> 2) type (내 코드에선 class)를 수정 한뒤에!! -> 3) 다음 섹션에 appendchild하기
--> 4) 업데이트 할 type명으로 바꿔서 -> 5) ajax에 type 보내기...
+--> 리다이렉트 안 된 페이지 안에서 todo -> doing 하고 옮겨진 doing을 done으로도 옮겨지게 하라는 뜻인듯.  
 
-: 2)번을 추가해서 해결! --> 자바스크립트느 절차지향적? 어떻게 실행되는가 공부하기.
+[click.js 해결]
+1) 시작 섹션에서 이 node를 삭제하고  2) type (내 코드에선 class)를 수정 한뒤에!!  3) 다음 섹션에 appendchild하기  
+4) 업데이트 할 type명으로 바꿔서 -> 5) ajax에 type 보내기...
+
+: 2)번을 추가해서 해결! --> 자바스크립트는 절차지향적? 어떻게 실행되는가 공부하기.
+
+- 자바 컨벤션의 중요성 
+1) if문 java convention 
+if(condition 1){
+ doSomething();
+ }else if(condition 2){
+ doSomething(); --> 카멜 표기법도 중요!!
+ }else(condition 3){
+ doOther();
+ }
+ 
+ 2)엔터도 무작정 쓰지 말고 의미있는 줄 단위로!  
+ 깔끔하게 보이려고 엔터로 정리하는게 아니라 
+ 규칙이 중요한 것.
 
 #### 자바스크립트 디버깅 
 
 1) 크롬 개발자 도구 
 break point 이용하자 
+
 
 
 
