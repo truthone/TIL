@@ -1441,40 +1441,11 @@ JSON 응답하기
 - 사용자가 임의로 Messageconverter를 사용하도록 하려면 WebMvcConfiguerAdapter의
 confitereMessageConverters메서도를 오버라이딩 하도록 한다.
 
-
-#### pj03 진행 하면서 이슈 
-- 배포경로 -워크스페이스 경로 문제
-context path : root 
-웹 어플리케이션 경우 (이 실습 , 이클립스-톰캣 -maven webapp일 경우 ) context path 는 webapp 이다.
-webapp
-  - WEB-INF
-      -jsp  <- 여기에 위치한  .jsp의 경로 작성 해야 할 경우: ./WEB-INF/jsp가 된다. 
- 
-./ : 상대 root 경로 
-
-ex) ./서블url  ./jsp/main.jsp
-
-
-function updateTransition() {
-  var el = document.querySelector("div.box");
-   
-  if (el) {
-    el.className = "box1";
-  } else {
-    el = document.querySelector("div.box1");
-    el.className = "box";
-  }
-   
-  return el;
-}
-
-var intervalID = window.setInterval(updateTransition, 7000);
-
+--- 
 
 ### 오프라인 강의 - BE : spring을 spring boot 2.x 바꾸기
 
-
--JUnit 이용한 테스트 익히기.
+- JUnit 이용한 테스트 익히기.
 
 ### 오프라인 강의 - FE
 - 주니어와 시니어의 차이 ?
@@ -1504,7 +1475,9 @@ hello => () 이거랑 function hello () 똑같은 것.
 
 .then : 통신이 되면 실행 
 
-#### PJ02 리뷰 + 공
+---
+
+#### PJ02 리뷰 + 공부
 
 - final 상수와 상수명명법 
 1) final 상수 이름지을 땐 대문자를 쓰고, 두가지 이상 뜻의 결합은 _ 표시를 이용해 표현한다.   
@@ -1544,14 +1517,49 @@ if(condition 1){
  doOther();
  }
  
- 2)엔터도 무작정 쓰지 말고 의미있는 줄 단위로!  
- 깔끔하게 보이려고 엔터로 정리하는게 아니라 
- 규칙이 중요한 것.
+ 2) 엔터도 무작정 쓰지 말고 의미있는 줄 단위로!  
+ 깔끔하게 보이려고 엔터로 정리하는게 아니라 규칙이 중요한 것.
+ 
+---
 
-#### 자바스크립트 디버깅 
+#### pj03 진행 하면서 이슈 
+- 배포경로 -워크스페이스 경로 문제
+context path : root 
+웹 어플리케이션 경우 (이 실습 , 이클립스-톰캣 -maven webapp일 경우 ) context path 는 webapp 이다.
+webapp
+  - WEB-INF
+      -jsp  <- 여기에 위치한  .jsp의 경로 작성 해야 할 경우: ./WEB-INF/jsp가 된다. 
+ 
+./ : 상대 root 경로 
 
-1) 크롬 개발자 도구 
-break point 이용하자 
+ex) ./서블url  ./jsp/main.jsp
+
+
+function updateTransition() {
+  var el = document.querySelector("div.box");
+   
+  if (el) {
+    el.className = "box1";
+  } else {
+    el = document.querySelector("div.box1");
+    el.className = "box";
+  }
+   
+  return el;
+}
+
+var intervalID = window.setInterval(updateTransition, 7000);
+
+#### 웹FE 기술요구사항
+- DOMContentloaded 이후에 모든 자바스크립트 로직이 동작하게 한다. 
+- 상단영역 애니메이션은 css3의 transition 과 transform 속성을 활용해서 구현해야 한다. 
+- Tab UI로 구성되는 카테고리 아이템이 노출되는 영역의 HTML은 카테고리별로 각각 만들지 않고 하나로 만들어 재사용한다.
+- 카테고리 탭을 선택할 때마다, ajax 요청을 해서 데이터를 가져와야 한다. 
+- 탭 메뉴는 Event delegation으로 구현한다. 
+- template 코드를 javascript 함수 안에 보관하지 않고, 별도 분리시켜 사용해야 한다. (예. HTML에 script태그 안에 보관한다던가)
+- 함수 하나에 여러 개의 기능을 넣지 않고, 함수를 여러 개로 분리한다. 
+
+
 
 
 
