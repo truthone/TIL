@@ -1561,6 +1561,9 @@ var intervalID = window.setInterval(updateTransition, 7000);
 - 함수 하나에 여러 개의 기능을 넣지 않고, 함수를 여러 개로 분리한다. 
 
 #### 웹BE 기술 요구사항
+
+- 제공된 SQL 이용해 테이블 생성하고 샘플 데이터를 입력한다. 
+- maven을
  
 
 
