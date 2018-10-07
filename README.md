@@ -1563,7 +1563,7 @@ var intervalID = window.setInterval(updateTransition, 7000);
 #### 웹BE 기술 요구사항
 
 - 제공된 SQL 이용해 테이블 생성하고 샘플 데이터를 입력한다. 
-- maven을
+- maven로 웹 어플리케이션 프로젝트 
  
 
 
