@@ -1562,9 +1562,25 @@ var intervalID = window.setInterval(updateTransition, 7000);
 
 #### 웹BE 기술 요구사항
 
-- 제공된 SQL 이용해 테이블 생성하고 샘플 데이터를 입력한다. 
-- maven로 웹 어플리케이션 프로젝트 
- 
+- 제공된 SQL 이요해서 테이블 생성, 샘플 데이터 입력. 
+- maven 이용해서 웹 어플리케이션 프로젝트 작성.
+- 실습했던것처럼 controller , service , dao 3가지로 레이어드 아키텍처 구성.
+- spring JDBC 이용해 주어진 테이블로부터 입력 / 수정 / 삭제 / 조회 하는 DAO와 DTO 작성.
+- 서비스 인터페이스 작성하고 비지니스 메소드를 작성. 
+- 서비스 인터페이스 구현하는 클래스 작성. 
+- 해당 구현 클래스의 메소드에 적절한 트랜젝션 관련 어노테이션 작성. 
+- 클라이언트에게 web API 제공 위해 RestControler 작성.
+
+#### 개발 순서 가이드 
+
+1. maven 프젝 생성 - groupId와 artifactId는 임의로 지정. 
+2. MySQL에서 프젝 사용할 DB앤드 사용자 계정 생성. 
+3. 생성한 DB에 계정정보는 resources/application.properties 파일에 다음과 같이 설정 
+   /*어쩌구 저쩌고*/
+4. 프로젝트 루트 폴더에 .gitignore 파일 생성. 
+   /*/src/main/resources/application.properties target .classpath .project .settings*/
+5. 생성한 DB에 접속해 주어진 sql을 실행한다. 
+   
 
 
 
