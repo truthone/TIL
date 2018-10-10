@@ -1574,13 +1574,31 @@ var intervalID = window.setInterval(updateTransition, 7000);
 #### 개발 순서 가이드 
 
 1. maven 프젝 생성 - groupId와 artifactId는 임의로 지정. 
+
 2. MySQL에서 프젝 사용할 DB앤드 사용자 계정 생성. 
-3. 생성한 DB에 계정정보는 resources/application.properties 파일에 다음과 같이 설정 
+
+2. 생성한 DB에 계정정보는 resources/application.properties 파일에 다음과 같이 설정 
    /*어쩌구 저쩌고*/
-4. 프로젝트 루트 폴더에 .gitignore 파일 생성. 
-   /*/src/main/resources/application.properties target .classpath .project .settings*/
-5. 생성한 DB에 접속해 주어진 sql을 실행한다. 
    
+3. 프로젝트 루트 폴더에 .gitignore 파일 생성. 
+   /*/src/main/resources/application.properties target .classpath .project .settings*/
+   
+4. 생성한 DB에 접속해 주어진 sql을 실행한다. 
+1) ddl.sql의 내용을 실행하여 테이블 생성 2) dml.sql의 내용을 실행하여 샘플 데이터 추가. 
+샘플 데이터 코드 있음 
+
+5. 샘플 이미지가 있는 압축파일인 img.zip을 webapp 폴더에 압축 해제.
+webapp
+ ┕━ img 
+img_map
+ ┕━ 샘플이미지들
+
+6. Spring MVC, Spring JDBC를 사용하기위한 Spring 설정 파일들 작성. 
+
+7. 샘플 데이터를 읽어 들여 메인화면 출력 위한 DTO , Controller, Service, Repositiory를 알맞게 작성. 
+web API는 다음과 유사한 형태로 제공되어야 한다. 
+
+
 
 
 
