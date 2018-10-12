@@ -820,9 +820,9 @@ timeout을 조절해 컨트롤 할 수 있다는 것이 setInterval과 다르다
 그렇다면 이거 말고 많이 사용하는 것은 ?
 #### requestAnimationFrame
 
-#### requestAnimationFrame활용
+#### requestAnimationFrame 활용
 - 애니메이션을 위한 전용 함수.
-- 함수 탈출 조건으로 컨트롤. 
+- 함수 탈출 조건으로 컨트롤한다. 
 - 16 밀리세컨드 이하 간격으론 권장하지 않는다. 
 
 #### CSS3 transition 활용 
@@ -853,10 +853,10 @@ css / transition / transform .. 이 빠르다.
 
 *180728*
 ### DOMContentLoaded
-- DOM ContentLoaded : DOM Tree를 먼저 모두 로드 됐을 때를 알린다. (document)
-- Load :모든 이벤트들 .. 모두 로드 했을 때 . (window)
+- DOMContentLoaded : DOM Tree를 먼저 모두 로드 됐을 때를 알린다. (document)
+- Load :모든 이벤트들 .. 모두 로드 했을 때를 알린다. (window)
 
-보통 html, css... 등 브라우저 렌더링 작업이 모두 끝난 후 이벤트 실행, 노드변경 찾는 등의 JS는 html 맨 아래 쪽에 위치 시킨다. 
+보통 html, css... 등 브라우저 렌더링 작업이 모두 끝난 후, 이벤트 실행이나 노드변경 찾는 등의 JS는 html 맨 아래 쪽에 위치 시킨다. 
 하지만 이렇게 해도 DOMTree가 전부 구성 되기 전에 JS 실행 되는 경우가 있다.
 DOMContentLoaded 이벤트는 DOM Tree가 모두 로드 되어 구성됐을 때를 알린다.
 때문에 DOMContentLoaded 이벤트 안에 DOM Tree 모두 로드 후 실행 시킬 일들을 써주면 좋다. (노드 찾기 , 구성등..)
@@ -865,14 +865,13 @@ DOMContentLoaded 이벤트는 DOM Tree가 모두 로드 되어 구성됐을 때�
 list가 각자 UI에 각각 비슷한 이벤트를 걸어 처리해야 한다면 어떻게 해야할까 ?  
 이벤트 등록을 효율적으로 어떻게 할까 ? for문을 쓸까?
 
-맨 상위 엘리먼트에 이벤트 리스너 등록하면 하위 엘리먼트 클릭해도 된다!
+--> Event delegation 이라는 바인딩 방식이 적용 되어 맨 상위 엘리먼트(부모)에 이벤트 리스너 등록하면 하위 엘리먼트(자식) 클릭해도 된다!
 
 +) firstChild / firstElementChild 차이
-firstElementchild 공백 확인
+firstElementchild : 공백 확인
 
 브라우저가 기억해야 할 이벤트 핸들러가 많이지면 메모리사용이 비효율적으로 된다.
-
-그럼 어떻게 ? -> target정보를 이용하자
+그럼 어떻게? -> target정보를 이용하자
 target : 내가 클릭한 지점 정보.
 
 - Bubbling : 하위 엘리먼트를 클릭 했더라도 상위 엘리먼트 쭉쭉 검색 올라가면서 그 중에 등록한 이벤트 리스너가 있다면 실행된다.
