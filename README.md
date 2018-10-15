@@ -1542,6 +1542,10 @@ function updateTransition() {
 
 var intervalID = window.setInterval(updateTransition, 7000);
 
+- 생성한 Database에 접속하기  
+mysql -h호스트명 -uDB계정명 -p데이터베이스이름 
+
+
 #### 웹FE 기술 요구사항
 
 - DOMContentloaded 이후에 모든 자바스크립트 로직이 동작하게 한다. 
