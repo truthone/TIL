@@ -931,7 +931,7 @@ repalce는 메서드 체이닝 방식으로 호출하면서 풀이 할 수 있�
 data가 배열 형태로 여러개면 간단한 반복문 또는 forEach같은 메서드 사용.
 
 <예제 코드>  
-~~~~
+~~~
 var data = {
               title: "hello",
               content : "chicken"
