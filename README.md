@@ -909,7 +909,7 @@ ul.addEventListener("click", function(evt){
 })
 
 
-#### HTML templating 작업
+### HTML templating 작업
 서버로부터 받은 데이터를 화면에 반영해야 할 때가 많은데, 
 HTML 형태는 그대로인데 데이터만 변경되는 경우는 어떻게 처리해야 효율적일까?
 
@@ -930,7 +930,8 @@ repalce는 메서드 체이닝 방식으로 호출하면서 풀이 할 수 있�
 
 data가 배열 형태로 여러개면 간단한 반복문 또는 forEach같은 메서드 사용.
 
-<예제 코드>
+<예제 코드>  
+~~~~
 var data = {
               title: "hello",
               content : "chicken"
@@ -947,24 +948,23 @@ var html =
 html.replace("{title}", data.title)
     .replace("{content}", data.content)
     .replace("{price}", data.price);
+~~~
 
-
-
-어떻게 템플릿을 보관 할 수 있을까?
-
-JS를 정적 데이터로 html로 넣는 건 좋지않다. 다음 두가지 방법이 있다.
+**어떻게 템플릿을 보관 할 수 있을까?**
+-> JS를 정적 데이터로 html로 넣는 건 좋지않다. 다음 두가지 방법이 있다.
 
 1) 서버에 file로 보관헤서 Ajax로 요청 받아온다.
 2) HTML 코드 안에 숨겨둔다
 
-HTML script태그는 type이 javascript가 아닌건 렌더링 안하고 무시한다. 이 속성을 이용해 type은 내맘대로 쓰고 HTML Template을 숨겨둔다.!
-추가로 ES6에의 템플릿 리터럴이라는건 repalce를 안쓰고 편하게 된다.
+HTML script태그는 type이 javascript가 아닌건 렌더링 안하고 무시한다.  
+이 속성을 이용해 type은 내맘대로 쓰고 HTML Template을 숨겨둔다.!  
+추가로 ES6에서 템플릿 리터럴이라는건 repalce를 안쓰고 편하게 된다.
 
-<예제 코드>
-
+<예제 코드>  
+~~~
 <script id="template-list-item" type="text/template">
  <li>
-  ~~~~~내용~~~
+  -내용-
  </li>
 </script>
 
@@ -990,12 +990,12 @@ for(var i =0; i< data.length; i++){
 }
 
 document.querySelector(".content").innerHTML = resultHTML;
-
+~~~
 
 +) innerHTML말고 특정 부위에 넣고싶을 때 쓰는 메서드는 insertAdjacentHtml 이나 insertBefore....
 
 
-#### Tab UI를 만들기 위한 HTML과 CSS 구조전략
+### Tab UI를 만들기 위한 HTML과 CSS 구조전략
 
 - Tab UI Component
 
@@ -1011,34 +1011,32 @@ document.querySelector(".content").innerHTML = resultHTML;
 모듈화가 잘돼있다. 전부 다 알 필요 없고, 필요할 때 필요한 것을 사용하자.
 +) AOP
 
-[스프링 웹 계층]
+**[스프링 웹 계층]**
 - spring-web 모듈 : 멀티파트 파일 업로드  / 서블릿 리스너 등/// 
 - spring-webmvc 모듈 : 다른 말로 Web-servlet모듈. Spring MVC 및 REST 웹 서비스 구현 .
 - spring-websocket 모듈
 - spring-webmvc-portlet 모듈
 
-
-[스프링 프레임워크 핵심 개념]
+**[스프링 프레임워크 핵심 개념]**
 - Container
 - IoC (Inversion of Control)
 - DI (Dependency Injection )
 
-
-- Container
+- Container  
 인스턴스 생명주기 관리. 인스턴스의 생성 부터 소멸까지 내가 직접하는 것이 아니라 컨테이너가 알아서 해준다. 
-앞 시간에서 배웠듯이 Tomcat이라는 WAS가 가지고 있는 컨테이너가 servlet 생성 ~ 소멸 관리한다.  JSP 
+앞 시간에서 배웠듯이 Tomcat이라는 WAS가 가지고 있는 컨테이너가 servlet 생성 ~ 소멸 관리한다.  
 
-- IoC (제어의 역전)
+- IoC (제어의 역전)  
 inversion : 도치, 역전 
 
 예를 들어 , 일상에 있는 tv 리모컨의 기본적인 구성과 기능 인터페이스가 동일 한 것과 
-TV공장을 만든다. -> 이 부분을 spring이 대신 해준다. 
-                   스프링이 가진 공장 2개 : 1) BeanFactory: 완전 간단기능만 있음. 
-                                        : 2) ApplicationContext : 빈팩토리 +a 그래서 더 많이 쓰인다.
+TV공장을 만든다. -> 이 부분을 spring이 대신 해준다.  
+                   스프링이 가진 공장 2개 : 1) BeanFactory: 완전 간단기능만 있음.  
+                                        : 2) ApplicationContext : 빈팩토리 +a 그래서 더 많이 쓰인다.  
 
 어노테이션.. 
 
-- DI (의존성 주입)
+- DI (의존성 주입)  
 컨테이너가 생성한 객체를 받아 온다. 
 그렇게 공장에서 만들어진 인스턴스를 가져올 수 있는 방법 중 하나이다.
 
