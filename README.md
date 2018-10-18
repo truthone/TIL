@@ -1594,6 +1594,17 @@ img_map
 7. 샘플 데이터를 읽어 들여 메인화면 출력 위한 DTO , Controller, Service, Repositiory를 알맞게 작성. 
 web API는 다음과 유사한 형태로 제공되어야 한다. 
 
+### PJ03 개발 일지
+[BE 부분]
+- web.xml 설정 중요
+ - context-param -> param-name , param-value 부분 자바 파일이랑 이름 똑같은지 확인 잘하기
+
+서비스 페키지 부분에 무슨 서비스를 할 것인지 작성 하는 것이다.
+서비스 인터페이스를 정의하면 서비스구현은 imple에다가 한다.
+
+트젝 읽기만 할때 onlyRead 설정
+
+
 
 
 
