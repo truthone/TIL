@@ -1570,7 +1570,7 @@ mysql -h호스트명 -uDB계정명 -p데이터베이스이름
 
 1. maven 프젝 생성 - groupId와 artifactId는 임의로 지정. 
 
-2. MySQL에서 프젝 사용할 DB앤드 사용자 계정 생성. 
+2. MySQL에서 프젝 사용할 DB & 사용자 계정 생성. 
 
 2. 생성한 DB에 계정정보는 resources/application.properties 파일에 다음과 같이 설정 
    /*어쩌구 저쩌고*/
@@ -1605,7 +1605,8 @@ web API는 다음과 유사한 형태로 제공되어야 한다.
 404 뜰 때 : WEB-INF / view .. 페이지에 나오는 경로랑 이클립스 파일명, 위치 잘 맞는지 확인하기.  
 dto - List <>
 
-연결할 테이블 
+연결할 테이블 찾기  : product
+
 
 
 
