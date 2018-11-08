@@ -1606,6 +1606,7 @@ web API는 다음과 유사한 형태로 제공되어야 한다.
 dto - List <>
 
 연결할 테이블 찾기  : product
+벡단에서 가져와서 노드
 
 ### wwcode 
 - DevRel 
