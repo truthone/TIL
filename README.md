@@ -1513,6 +1513,54 @@ if(condition 1){
  
 ---
 
+#### 웹FE 기술 요구사항
+
+- DOMContentloaded 이후에 모든 자바스크립트 로직이 동작하게 한다. 
+- 상단영역 애니메이션은 css3의 transition 과 transform 속성을 활용해서 구현해야 한다. 
+- Tab UI로 구성되는 카테고리 아이템이 노출되는 영역의 HTML은 카테고리별로 각각 만들지 않고 하나로 만들어 재사용한다.
+- 카테고리 탭을 선택할 때마다, ajax 요청을 해서 데이터를 가져와야 한다. 
+- 탭 메뉴는 Event delegation으로 구현한다. 
+- template 코드를 javascript 함수 안에 보관하지 않고, 별도 분리시켜 사용해야 한다. (예. HTML에 script태그 안에 보관한다던가)
+- 함수 하나에 여러 개의 기능을 넣지 않고, 함수를 여러 개로 분리한다. 
+
+#### 웹BE 기술 요구사항
+
+- 제공된 SQL 이요해서 테이블 생성, 샘플 데이터 입력. 
+- maven 이용해서 웹 어플리케이션 프로젝트 작성.
+- 실습했던것처럼 controller , service , dao 3가지로 레이어드 아키텍처 구성.
+- spring JDBC 이용해 주어진 테이블로부터 입력 / 수정 / 삭제 / 조회 하는 DAO와 DTO 작성.
+- 서비스 인터페이스 작성하고 비지니스 메소드를 작성. 
+- 서비스 인터페이스 구현하는 클래스 작성. 
+- 해당 구현 클래스의 메소드에 적절한 트랜젝션 관련 어노테이션 작성. 
+- 클라이언트에게 web API 제공 위해 RestControler 작성.
+
+#### 개발 순서 가이드 
+
+~~1. maven 프젝 생성 - groupId와 artifactId는 임의로 지정. ~~
+
+~~2. MySQL에서 프젝 사용할 DB & 사용자 계정 생성. 
+
+ ~~3. 생성한 DB에 계정정보는 resources/application.properties 파일에 다음과 같이 설정 
+   /*어쩌구 저쩌고*/edwith에 써져있는거 
+   
+~~4. 프로젝트 루트 폴더에 .gitignore 파일 생성. 
+   /*/src/main/resources/application.properties target .classpath .project .settings*/
+   
+~~4. 생성한 DB에 접속해 주어진 sql을 실행한다. 
+1) ddl.sql의 내용을 실행하여 테이블 생성 2) dml.sql의 내용을 실행하여 샘플 데이터 추가. 
+~~샘플 데이터 코드 있음
+
+~~5. 샘플 이미지가 있는 압축파일인 img.zip을 webapp 폴더에 압축 해제.
+webapp
+ ┕━ img 
+img_map
+ ┕━ 샘플이미지들
+
+~~6. Spring MVC, Spring JDBC를 사용하기위한 Spring 설정 파일들 작성. 
+
+~~7. 샘플 데이터를 읽어 들여 메인화면 출력 위한 DTO , Controller, Service, Repositiory를 알맞게 작성. ~~
+- web API는 다음과 유사한 형태로 제공되어야 한다. 
+
 #### pj03 진행 하면서 이슈 
 - 배포경로 -워크스페이스 경로 문제
 context path : root 
@@ -1543,55 +1591,6 @@ var intervalID = window.setInterval(updateTransition, 7000);
 
 - 생성한 Database에 접속하기  
 mysql -h호스트명 -uDB계정명 -p데이터베이스이름 
-
-
-#### 웹FE 기술 요구사항
-
-- DOMContentloaded 이후에 모든 자바스크립트 로직이 동작하게 한다. 
-- 상단영역 애니메이션은 css3의 transition 과 transform 속성을 활용해서 구현해야 한다. 
-- Tab UI로 구성되는 카테고리 아이템이 노출되는 영역의 HTML은 카테고리별로 각각 만들지 않고 하나로 만들어 재사용한다.
-- 카테고리 탭을 선택할 때마다, ajax 요청을 해서 데이터를 가져와야 한다. 
-- 탭 메뉴는 Event delegation으로 구현한다. 
-- template 코드를 javascript 함수 안에 보관하지 않고, 별도 분리시켜 사용해야 한다. (예. HTML에 script태그 안에 보관한다던가)
-- 함수 하나에 여러 개의 기능을 넣지 않고, 함수를 여러 개로 분리한다. 
-
-#### 웹BE 기술 요구사항
-
-- 제공된 SQL 이요해서 테이블 생성, 샘플 데이터 입력. 
-- maven 이용해서 웹 어플리케이션 프로젝트 작성.
-- 실습했던것처럼 controller , service , dao 3가지로 레이어드 아키텍처 구성.
-- spring JDBC 이용해 주어진 테이블로부터 입력 / 수정 / 삭제 / 조회 하는 DAO와 DTO 작성.
-- 서비스 인터페이스 작성하고 비지니스 메소드를 작성. 
-- 서비스 인터페이스 구현하는 클래스 작성. 
-- 해당 구현 클래스의 메소드에 적절한 트랜젝션 관련 어노테이션 작성. 
-- 클라이언트에게 web API 제공 위해 RestControler 작성.
-
-#### 개발 순서 가이드 
-
-1. maven 프젝 생성 - groupId와 artifactId는 임의로 지정. 
-
-2. MySQL에서 프젝 사용할 DB & 사용자 계정 생성. 
-
-2. 생성한 DB에 계정정보는 resources/application.properties 파일에 다음과 같이 설정 
-   /*어쩌구 저쩌고*/
-   
-3. 프로젝트 루트 폴더에 .gitignore 파일 생성. 
-   /*/src/main/resources/application.properties target .classpath .project .settings*/
-   
-4. 생성한 DB에 접속해 주어진 sql을 실행한다. 
-1) ddl.sql의 내용을 실행하여 테이블 생성 2) dml.sql의 내용을 실행하여 샘플 데이터 추가. 
-샘플 데이터 코드 있음 
-
-5. 샘플 이미지가 있는 압축파일인 img.zip을 webapp 폴더에 압축 해제.
-webapp
- ┕━ img 
-img_map
- ┕━ 샘플이미지들
-
-6. Spring MVC, Spring JDBC를 사용하기위한 Spring 설정 파일들 작성. 
-
-7. 샘플 데이터를 읽어 들여 메인화면 출력 위한 DTO , Controller, Service, Repositiory를 알맞게 작성. 
-web API는 다음과 유사한 형태로 제공되어야 한다. 
 
 ### PJ03 개발 일지
 [BE 부분]
