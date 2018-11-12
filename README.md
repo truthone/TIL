@@ -1605,10 +1605,13 @@ mysql -h호스트명 -uDB계정명 -p데이터베이스이름
 dto - List <>
 
 연결할 테이블 찾기  : product
-벡단에서 가져와서 노드
+벡단에서 가져와서 노드  
+cmd창으로 db 접속 : mysql -h127.0.0.1 -p(p: 비밀번호) 접속할 db 명 -u (u: 유저)저장한 유저명  
+
 
 ### wwcode 
 - DevRel 
+
 
 
 
