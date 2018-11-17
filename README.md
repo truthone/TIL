@@ -1608,7 +1608,8 @@ dto - List <>
 - 벡단에서 가져와서 노드  
 - cmd창으로 db 접속 : mysql -h127.0.0.1 -p(p: 비밀번호) 접속할 db 명 -u (u: 유저)저장한 유저명  
 
-
+service -> 어떤 서비스(기능)들이 있는지만 기술.    
+serviceImpl -> implement : 이행하다. 서비스 구현 해놓는 곳.    
 
 ### wwcode 
 - DevRel 
