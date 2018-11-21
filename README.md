@@ -1559,7 +1559,13 @@ img_map
 ~~6. Spring MVC, Spring JDBC를 사용하기위한 Spring 설정 파일들 작성.~~ 
 
 ~~7. 샘플 데이터를 읽어 들여 메인화면 출력 위한 DTO , Controller, Service, Repositiory를 알맞게 작성.~~
-- web API는 다음과 유사한 형태로 제공되어야 한다. 
+web API는 다음과 유사한 형태로 제공되어야 한다. 
+1. 카테고리 목록 구하기  
+2. GET방식
+3. http://loclahost:8080/api/categories  
+4. 카테고리별 count 출력
+
+
 
 #### pj03 진행 하면서 이슈 
 - 배포경로 -워크스페이스 경로 문제
