@@ -1560,11 +1560,21 @@ img_map
 
 ~~7. 샘플 데이터를 읽어 들여 메인화면 출력 위한 DTO , Controller, Service, Repositiory를 알맞게 작성.~~
 web API는 다음과 유사한 형태로 제공되어야 한다. 
-1. 카테고리 목록 구하기  
-2. GET방식
-3. http://loclahost:8080/api/categories  
-4. 카테고리별 count 출력
 
+1. 카테고리 목록 구하기   
+ 1) GET방식 -> REST API 으로 작성하자
+ 2) http://loclahost:8080/api/categories  
+ 3) 카테고리별 count 출력
+
+2. 상품 목록 구하기 : 상품정보(전시 정보 포함), 전체 카운트 수 (totalCount)를 구한다.
+ 1) GET
+ 2) 3건 이후의 상품 목록 구하기(최대 4건 보이게) - 4건은 벡앤드에서 설정되어 있다. 
+ 3) 1번 product 상품 보여주기 
+ 4) 1번 카테고리에서 3건 이후의 상품목록 구하기 (최대 4건 보임)
+ 
+3. 프로모션 정보 구하기
+
+ 
 
 
 #### pj03 진행 하면서 이슈 
