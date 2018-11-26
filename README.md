@@ -1627,9 +1627,9 @@ dto - List <>
 service -> 어떤 서비스(기능)들이 있는지만 기술.    
 serviceImpl -> implement : 이행하다. 서비스 구현 해놓는 곳.    
 
-### wwcode 
-- DevRel 
-
+### 강의 
+- WWCODE: DevRel 
+- IT 멘토링 : 오로지 실력 , 그리고 두려워하지 말자 어차피 어떻게 될지 모른다  
 
 
 
