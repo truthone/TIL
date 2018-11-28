@@ -1559,7 +1559,8 @@ img_map
 ~~6. Spring MVC, Spring JDBC를 사용하기위한 Spring 설정 파일들 작성.~~ 
 
 ~~7. 샘플 데이터를 읽어 들여 메인화면 출력 위한 DTO , Controller, Service, Repositiory를 알맞게 작성.~~
-web API는 다음과 유사한 형태로 제공되어야 한다. 
+
+web API는 다음과 유사한 형태로 제공되어야 한다.  
 
 1. 카테고리 목록 구하기   
  1) GET방식 -> REST API 으로 작성하자
@@ -1573,7 +1574,7 @@ web API는 다음과 유사한 형태로 제공되어야 한다.
  4) 1번 카테고리에서 3건 이후의 상품목록 구하기 (최대 4건 보임)
  
 3. 프로모션 정보 구하기
-
+ 1) 이미지 type이 ma 인 것을 기준으로 productImageId를 넣는다.
  
 
 
