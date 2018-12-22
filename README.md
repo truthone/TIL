@@ -770,7 +770,7 @@ var a = [1,2,3,"hello", null, true, [] ]; //배열 안에는 모든 타입 ok. �
 *-오늘 중요한 3대장 함수; 배열 탐색 메서드-* 
 1) forEach() : 함수를 매개 변수로 받을 수 있는 for문.
 2) map() : forEach처럼 함수를 매개변수로 받는 함수. 새로운 배열을 반환한다.
-3) filter()
+3) filter() :
 
 +) reduce / some / every ...
 
