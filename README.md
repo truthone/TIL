@@ -840,7 +840,7 @@ css / transition / transform .. 이 빠르다.
 
 +) vendor prefix
 
-
+```
 *180726*
 #### QnA day
 
@@ -858,17 +858,47 @@ css / transition / transform .. 이 빠르다.
 
 마루180
 아산나눔재단 
+```
 
+### WEB UI
+- 서비스 개발을 위한 디렉토리 구성 : 웹브라우저 렌더링에 필요한 JS와 CSS파일의 구성방법 이해. 
+디렉토리 구성 = 환경 설정.  
+JS파일 구성 : 만약 JS가 코드가 많지 않다면, 한 페이지에 모두 표현하는 것도 좋다. 아니면 의미에 맞게 구분하는 방법도 있다.  
+ex) 보통 HTML 상단, head 태그에 위치한다. DOM 렌더링 위해 미리 CSS 팡일을 로딩해야 하기 때문이다.  
+그 다음엔 JS는 HTML 하단 , body 태그 닫히기 전에 위치한다. CSS와 HTML을 이용한 화면의 배치 크기를 렌더링 할 때 방해 하지 않기 위해서다.  
 
-*180728*
-### DOMContentLoaded
-- DOMContentLoaded : DOM Tree를 먼저 모두 로드 됐을 때를 알린다. (document)
-- Load :모든 이벤트들 .. 모두 로드 했을 때를 알린다. (window)
+```
+이상적인 코드 이렇게 분리하자.  
+<html>
+  <head>
+    <link rel="stylesheet" href="./css/main.css">
+    
+ </head>
+ <body>
+      <script src="js/main.js"></script>
+ </body>
+</html>
+```
+### DOMContentLoaded : 로딩 이후에 JS동작이 이뤄지는 것이 일반적. JS 가장 적절한 실행 타이밍은?
+- DOMContentLoaded : DOM Tree 분석이 끝나자마자 이벤트 발생. (document)
+- Load : DOM Tree말고 그 외 모든 자원이 다 받아져 렌더링(화면 표시)까지 다 끝난 시점에서 Load 발생.  
+모든 이벤트들 .. 모두 로드 했을 때를 알린다. (window)
 
-보통 html, css... 등 브라우저 렌더링 작업이 모두 끝난 후, 이벤트 실행이나 노드변경 찾는 등의 JS는 html 맨 아래 쪽에 위치 시킨다. 
-하지만 이렇게 해도 DOMTree가 전부 구성 되기 전에 JS 실행 되는 경우가 있다.
-DOMContentLoaded 이벤트는 DOM Tree가 모두 로드 되어 구성됐을 때를 알린다.
-때문에 DOMContentLoaded 이벤트 안에 DOM Tree 모두 로드 후 실행 시킬 일들을 써주면 좋다. (노드 찾기 , 구성등..)
+! script 추가는 DOM이 정의된 HTML코드 뒤에 작성해야 알맞게 DOM node를 찾을 수 있다.  
+
+보통 html, css... 등 브라우저 렌더링 작업이 모두 끝난 후, 이벤트 실행이나 노드변경 찾는 등의 JS는 html 맨 아래 쪽에 위치 시킨다.   
+하지만 이렇게 해도 DOMTree가 전부 구성 되기 전에 JS 실행 되는 경우가 있다.  
+DOMContentLoaded 이벤트는 DOM Tree가 모두 로드 되어 구성됐을 때를 알린다.  
+때문에 DOMContentLoaded 이벤트 안에 DOM Tree 모두 로드 후 실행 시킬 일들을 써주면 좋다. (노드 찾기 , 구성등..)  
+
+```
+document.addEventListener("DOMContetLoaded", function(){
+  startSomething();
+  initFoo();
+  initBar();
+  var el = document.querySelector("div");
+});
+```
 
 ### Event delegation (기법) : 부모 엘리먼트에 위임한다.
 list가 각자 UI에 각각 비슷한 이벤트를 걸어 처리해야 한다면 어떻게 해야할까 ?  
@@ -1542,6 +1572,11 @@ if(condition 1){
 - 서비스 인터페이스 구현하는 클래스 작성. 
 - 해당 구현 클래스의 메소드에 적절한 트랜젝션 관련 어노테이션 작성. 
 - 클라이언트에게 web API 제공 위해 RestControler 작성.
+
+#### 화면 레이아웃
+GNB 영역 : Global . 사이트 전체에 동일하게 적용되는 네비게이션 바.  
+LNB 영역 : Local . 사이트 특정 지역으로 가기 위해 적용되는 네비게이션바. 때문에 대부분 메인이 되는 메뉴 , 대메뉴 쪽에 사용.  
+SNB 영역 : Sub. 사이트의 서브 지역으로 가기 위한 네비게이션 바. 대메뉴를 통해 특정 지역으로 들어 왔다면, 그 안에서 이제 세부 주소로 가기위한 배너.  
 
 #### 개발 순서 가이드 
 
