@@ -860,7 +860,7 @@ css / transition / transform .. 이 빠르다.
 아산나눔재단 
 ```
 
-### WEB UI
+## WEB UI
 - 서비스 개발을 위한 디렉토리 구성 : 웹브라우저 렌더링에 필요한 JS와 CSS파일의 구성방법 이해. 
 디렉토리 구성 = 환경 설정.  
 JS파일 구성 : 만약 JS가 코드가 많지 않다면, 한 페이지에 모두 표현하는 것도 좋다. 아니면 의미에 맞게 구분하는 방법도 있다.  
@@ -879,7 +879,7 @@ ex) 보통 HTML 상단, head 태그에 위치한다. DOM 렌더링 위해 미리
  </body>
 </html>
 ```
-### DOMContentLoaded : 로딩 이후에 JS동작이 이뤄지는 것이 일반적. JS 가장 적절한 실행 타이밍은?
+## DOMContentLoaded : 로딩 이후에 JS동작이 이뤄지는 것이 일반적. JS 가장 적절한 실행 타이밍은?
 - DOMContentLoaded : DOM Tree 분석이 끝나자마자 이벤트 발생. (document)
 - Load : DOM Tree말고 그 외 모든 자원이 다 받아져 렌더링(화면 표시)까지 다 끝난 시점에서 Load 발생.  
 모든 이벤트들 .. 모두 로드 했을 때를 알린다. (window)
@@ -900,7 +900,7 @@ document.addEventListener("DOMContetLoaded", function(){
 });
 ```
 
-### Event delegation (기법) : 부모 엘리먼트에 위임한다.
+## Event delegation (기법) : 부모 엘리먼트에 위임한다.
 list가 각자 UI에 각각 비슷한 이벤트를 걸어 처리해야 한다면 어떻게 해야할까 ?  
 이벤트 등록을 효율적으로 어떻게 할까 ? for문을 쓸까?
 
@@ -948,7 +948,7 @@ ul.addEventListener("click", function(evt){
 })
 
 
-### HTML templating 작업
+## HTML templating 작업
 서버로부터 받은 데이터를 화면에 반영해야 할 때가 많은데, 
 HTML 형태는 그대로인데 데이터만 변경되는 경우는 어떻게 처리해야 효율적일까?
 
@@ -1034,53 +1034,91 @@ document.querySelector(".content").innerHTML = resultHTML;
 +) innerHTML말고 특정 부위에 넣고싶을 때 쓰는 메서드는 insertAdjacentHtml 이나 insertBefore....
 
 
-### Tab UI를 만들기 위한 HTML과 CSS 구조전략
+## Tab UI를 만들기 위한 HTML과 CSS 구조전략
 
 - Tab UI Component
 
 +) tap UI 클릭시 ajax로 데이터를 받아올 때, 매번 똑같은 데이터를 새로 받아오지말고
 이미 가져온 데이터는 배열로 저장하고 재사용 하도록 하자 -> 캐쉬 기능
 
+## Spring (프레임워크)
 
-*180720*
+프레임워크 : 반제품.   
+스프링프레임워크는 약 20개의 모듈로 구성, 모듈화가 잘돼있다. (모듈을)전부 다 알 필요 없고,   
+필요할 때 필요한 것을 사용하자.  
++) AOP 지원해준다.
 
-### Spring (프레임워크)
+[AOP 와 인스트루멘테이션(Instrumentation)]
+- spring-AOP : AOP 얼라이언스와 호환되는 방법. AOP 지원.
+- spring-aspects : AspetJ와의 통합 제공. 
+- spring-intrument: 인스트루멘테이션을 지원하는 클래스와 특정 WAS와 사용하는 클래스로 더 구현체 제공.  
+                    참고로 BCI(Byte Code Instrumentations)은 런타임이나 로드(Load)때 클래스의 바이트 코드에 변경을 가하는 방법이다.  
+                    
+[메시징 Messaging]
+-spring-messaging : 스프링 프레임워크4는 메시지 기반 어플리케이션 작성 할 수 있는 Message, MessageChannel, Messagehandler 등 제공.  
+                    또한, 해당 모듈에는 메소드에 메시지 맵핑하기 위한 어노테이션 포함되어 있으며, Spring MVC어노테이션과 유사하다.  
+                    
+[데이터 엑서스 (Data Access)/ 통합(Integration) 계층 ]
 
-프레임워크 : 반제품 
-모듈화가 잘돼있다. 전부 다 알 필요 없고, 필요할 때 필요한 것을 사용하자.
-+) AOP
+- 데이터 엑세스/통합 계층은 JDBC , ORM , OXM , JMS 및 트랜잭션 모듈로 구성되어 있다. 
+- spring-jdbc : 자바 JDBC프밍을 쉽게 할 수 있도록 기능을 제공.  
+- spring-tx : 선언적 트랜잭션 관리를 할 수 있는 기능 제공.  
+- spring-orm : JPA, JDO 및 Hibernate를 포함한 ORM API를 위한 통합 레이어 제공.   
+- spring-oxm : JAXB , Catstor, XMLBeans, JiBX및 Xstream과 같은 Object/XML 맵핑 지원.
+- spring-jms : 메시지 생성 (producing) 및 사용(consuming)을 위한 기능을 제공, Spring framework4.1부터 spring-messaging 모듈과의 통합을 제공.  
+
 
 **[스프링 웹 계층]**
-- spring-web 모듈 : 멀티파트 파일 업로드  / 서블릿 리스너 등/// 
-- spring-webmvc 모듈 : 다른 말로 Web-servlet모듈. Spring MVC 및 REST 웹 서비스 구현 .
+- spring-web 모듈 : 멀티파트 파일 업로드  / 서블릿 리스너 등
+- spring-webmvc 모듈 : 다른 말로 Web-servlet모듈. Spring MVC 및 REST 웹 서비스 구현.
 - spring-websocket 모듈
 - spring-webmvc-portlet 모듈
 
 **[스프링 프레임워크 핵심 개념]**
-- Container
-- IoC (Inversion of Control)
-- DI (Dependency Injection )
 
-- Container  
-인스턴스 생명주기 관리. 인스턴스의 생성 부터 소멸까지 내가 직접하는 것이 아니라 컨테이너가 알아서 해준다. 
-앞 시간에서 배웠듯이 Tomcat이라는 WAS가 가지고 있는 컨테이너가 servlet 생성 ~ 소멸 관리한다.  
+- Container 
+컨테이너는 보통 인스턴스 생명주기 관리한다. 생성된 인스턴스들에게 추가적인 기능 제공.   
+인스턴스의 생성 부터 소멸까지 내가 직접하는 것이 아니라 컨테이너가 알아서 해준다.   
+앞 시간에서 배웠듯이 Tomcat이라는 WAS가 가지고 있는 서블릿 컨테이너가 대신 servlet 생성 ~ 소멸 관리한다.  
+WAS는 웹브라우저로부터 servlet URL에 해당하는 요청을 받으면 Servlet을 메모리에 올린 후 -> 실행: 이 일을 WAS가 가지고 있는 Servlet 컨테이너가  해준다는 것.  
 
-- IoC (제어의 역전)  
-inversion : 도치, 역전 
+
+- IoC (Inversion of Control) (제어의 역전) 
+inversion : 도치, 역전.  개발자는 프로그램의 흐름을 제어하는 코드를 작성하는데, 이 흐름의 제어를 개발자가 하는 것이 아닌  
+다른 프로그램이 그 흐름을 제어하는 것을 IoC라고 한다.  
 
 예를 들어 , 일상에 있는 tv 리모컨의 기본적인 구성과 기능 인터페이스가 동일 한 것과 
-TV공장을 만든다. -> 이 부분을 spring이 대신 해준다.  
-                   스프링이 가진 공장 2개 : 1) BeanFactory: 완전 간단기능만 있음.  
-                                        : 2) ApplicationContext : 빈팩토리 +a 그래서 더 많이 쓰인다.  
+TV공장을 만든다. -> 이 부분을 spring이 대신 해준다.    
 
-어노테이션.. 
+스프링에서 공장 역할을 하는 2가지  
+1) BeanFactory: 완전 간단 기능만 있음.  
+2) ApplicationContext : 빈팩토리 +a. 빈팩토리가 가지고 있는 기능에 트잭 처리, AOP처리 이런 걸 할 수 잇따. 그래서 더 많이 쓰인다.  
 
-- DI (의존성 주입)  
-컨테이너가 생성한 객체를 받아 온다. 
-그렇게 공장에서 만들어진 인스턴스를 가져올 수 있는 방법 중 하나이다.
+대신 착착 해주는 컨테이너를 만들어주는 공장을 만들어야 하는데 스프링이 그 공장을 대신 만들어준다.    
+사용자는 그 공장 이용해서 만들어가면 된다..  
 
+- DI (Dependency Injection ) (의존성 주입)  
+컨테이너가 생성한 객체를 받아 온다.     
+공장에서 만들어진 인스턴스를 가져올 수 있는 방법 중 하나이다.    
+DI는 클래스 사이의 의존 관계를 빈(Bean)설정 정보를 바탕으로 컨테이너가 자동으로 연결해주는 것을 말한다.    
 
-*180729-31*
+IoC : 프로그램이 개발자에게 틀을 강요해서 그 형식으로 만들게 하는것
+
+DI : 강요하는 내용들  ex) 박스를 만들때 높이는 4cm, 너비는 10cm로 해라 등등
+
+장점 : 모양이 정형화 됨으로 유지및 관리가 쉽다,
+
++) 프레임워크와 라이브러리의 차이점은 ?  
+프레임워크는 제어의역전 IoC 개념이 적용된 대표 기술. 프레임워크는 특정 sw문제를 해결 위해 상호 협럭하는 클래스와 인터페이스의 집합이라 할 수 있으며, 프로그래머가 완성시키는 작업을 해야한다.  
+라이브러리는 단순 활용 가능한 도구의 집합이다.  개발자가 만든 클래스에서 호출해 사용하고 클래스들을 나열해서  
+필요한 클래스를 불러서 사용하는 방식을 취한다. 
+
+큰 차이 점 => 제어 흐름에 대한 주도성이 누구에게/ 어디에 있는가 즉, '어플리케이션의 흐름을 누가 쥐고있는가'.  
+라이브러리를 사용하는 어플리케이션 코드는 어플리케이션 흐름을 직접 제어한다. 필요할 때 능동적으로 라이브러리를 사용 할 뿐.  
+반면에 프레임워크는 거꾸로 , 어플리케이션 코드가 프레임워크에 의해 사용되는 것이다.   
+프레임워크 위에 개발한 클래스를 등록해두고, 프레임워크가 흐름을 주도하는 중에 만든 코드를 사용하는 방식.  
+어플리케이션 코드는 프레임워크가 짜놓은 틀에서 수동적으로 동작해야 한다.   = 프레임워크에는 제어의 역전 개념이 적용되어 있어야 한다.  
+
 
 #### Spring MVC
 - MVC :
