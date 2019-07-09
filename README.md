@@ -745,14 +745,14 @@ DOM API를 이용하여 쉽게 html element를 찾을 수 있다.
 ---
 
 *180715*
-## 자바스크립트 배열 : array / array method
+
+### 자바스크립트 배열 : array / array method
 - 자바스크립트 배열 선언  
 ```
 var a =[]; // new Array() 라고 선언할 수 있지만 보통 간단하게 왼쪽같이 선언. 
 var a = [1,2,3,"hello", null, true, [] ]; //배열 안에는 모든 타입 ok. 함수 , 배열, 객체도 배열 안에 들어 갈 수 있다.  
 ```
 #### 배열의 유용한 메서드들
-
 - .indexOf() : 배열 원소에 특정 값이 있는지 없는지. 문자열 있나 확인 할 수 있다. 결과는 -1보다 큰지 작은지로 판단.
 ```
 [1,2,3,4].indexOf(3)
@@ -767,131 +767,120 @@ var a = [1,2,3,"hello", null, true, [] ]; //배열 안에는 모든 타입 ok. �
 원래 배열을 반환할 수도 있고 새로운 배열을 만들 수도 있다.  
 원래 배열이 변경 될 수 있으니 조심하자.    
 
-*-오늘 중요한 3대장 함수; 배열 탐색 메서드-* 
+**<중요한 3대장 함수 : 배열 탐색 메서드>**
+```
 1) forEach() : 함수를 매개 변수로 받을 수 있는 for문.
 2) map() : forEach처럼 함수를 매개변수로 받는 함수. 새로운 배열을 반환한다.
 3) filter() :
-
 +) reduce / some / every ...
 
 *반환값이 중요하다. 새로운 배열을 반환하는지, 기존의 배열을 반환하는지*
+```
 
 #### 자바스크립트 객체
 
 - 자바스크립트 객체 : (key + value) 로 이루어진 'dictionary 자료구조'.  
-
-배열 : 순서가 있는 리스트.  
-객체 :  키값을 이용한 자료구조.  
+    - 배열 : 순서가 있는 리스트.  
+    - 객체 :  키값을 이용한 자료구조.  
 
 - 객체 탐색
-/* var obj = {key : value} */
+```C 
+var obj = {key : value} 
 obj.key || obj.["key"]
-
-- for-in 문 -> 객체값 찾는데 많이 쓴다.
+```
+- for-in 문 : 객체값 찾는데 많이 쓴다.
 - object.keys 랑 forEach 이용해서 하는 방법도 있다.
 
-## DOM API
-#### DOM node 생성 & 추가
+## < DOM API >
 
+#### DOM node 생성 & 추가
 - firstChild : 공백까지 노드로 인식한다.
-- firstElementchild : 이걸 이용하자 --...
+- firstElementchild : 이걸 이용하자.
 
 #### 문자열기반으로 DOM 조작하기
-- tip : 크롬 개발도구 elemnet 클릭 후 콘솔창에 $0쓰면 클릭한 element가리킴.
+ *tip : 크롬 개발도구 elemnet 클릭 후 콘솔창에 $0쓰면 클릭한 element가리킴*
 - node. closest("section") : 이 노드의 섹션 태그를 찾아준다. 이러면 계속 parentnode 쓸 필요 없다.
 
-## ajax + 크롬개발자도구로 디버깅 보기
+## < ajax + 크롬개발자도구로 디버깅 보기 >
 - responseText로 온 문자열은 브라우저에 표시하기 위해서 jsonParse를 이용해 객체화 시켜 출력되게 한다.
 
-+) 동영상보고 비동기 통신 과정 정리해보긔  
++) 동영상보고 비동기 통신 과정 정리해보기  
 +) JSONP  
 
-*tip : 크롬개발자 도구에서 녹화기능은 반응속도를 체크할 때 좋다. *
+*tip : 크롬개발자 도구에서 녹화기능은 반응속도를 체크할 때 좋다*
 
-## 웹 애니메이션의 이해
-
+## < 웹 애니메이션의 이해 >
 - 간단한 방식은 css3의 transform과 transition 속성을 이용하는 것이다.
 - FPS : 1초에 화면에 표현 할 수 있는 정지화면(frame) 수.  16밀리세컨드 간격이 적당하다. (1000/16)
 
-간단하고 규칙적인 것 -> css로.  
-세밀한 조정 -> 추가로 자바스크립 이용.  
+   *간단하고 규칙적인 것 -> css로.*  
+   *세밀한 조정 -> 추가로 자바스크립 이용.* 
 
 - setInterval (이거 가지고 애니메이션 구현은 잘 안함)
 : 내가 준 시간에 따라 실행.
-단점 -> 이벤트 콜백이 지연되어 지연문제가 발생 할 수 있다.
+   - 단점 -> 이벤트 콜백이 지연되어 지연문제가 발생 할 수 있다.
 
 - setTimeout
-재귀적으로 호출한다. 끝난 다음에 또 부르고 끝난 다음에 또 부르고....
-끝난 다음에 실행 되는 것이기 때문에 먹히는 거 없이 (?)  할 수 있지만, 지연문제를 간과 할 순 없다.
-timeout을 조절해 컨트롤 할 수 있다는 것이 setInterval과 다르다.
+  - 재귀적으로 호출한다. 끝난 다음에 또 부르고 끝난 다음에 또 부르고....
+  - 끝난 다음에 실행 되는 것이기 때문에 먹히는 거 없이 (?)  할 수 있지만 ,지연문제를 간과 할 순 없다.
+  - timeout을 조절해 컨트롤 할 수 있다는 것이 setInterval과 다르다.
 
 
 그렇다면 이거 말고 많이 사용하는 것은 ?
-#### requestAnimationFrame
 
-#### requestAnimationFrame 활용
+#### 1) requestAnimationFrame 활용
 - 애니메이션을 위한 전용 함수.
 - 함수 탈출 조건으로 컨트롤한다. 
 - 16 밀리세컨드 이하 간격으론 권장하지 않는다. 
 
-#### CSS3 transition 활용 
-모든 css속성을 애니메이션과 함께 1초동안 변화 시키자. 
-css / transition / transform .. 이 빠르다. 
+#### 2) CSS3 transition 활용 
+- 모든 css속성을 애니메이션과 함께 1초동안 변화 시키자. 
+- css / transition / transform .. 이 빠르다. 
 
 +) vendor prefix
 
-```
-*180726*
-#### QnA day
+## < WEB UI >
+- 서비스 개발을 위한 디렉토리 구성 :
+  - 웹브라우저 렌더링에 필요한 JS와 CSS파일의 구성방법 이해. 
+  - 디렉토리 구성 = 환경 설정.  
 
-- 상대적 링크 : local8080.. 이거 말고->  ./ 으로 사용하자. 배포시 사용자의 port가 사용자마다 다를 수 있기 때문이다. 
-- click.js 의 todo || doing if문 리팩토링
-- main문 css 가운데로 하기 
-
-- HTML5형식으로 작성하길 권장 -> 그럼 DOCTYPE 선언 안 해도됨.
-
-- '지킬' 이용해서 깃헙에 정적 블로그 만들기
-
-면접 때 ex: sping으로 Vue 나.. 이런거 이용하지 않고  순수 자바스크립트로 뭘 만들어 봤다.
-이런거 배웠고 앞으로는 이런 걸 응용해서 어떤 걸 만들고 싶다
-일일 커밋 매일하기. 부코 강의에 나오는 코드는 깃헙에 올려도 괜춘 !
-
-마루180
-아산나눔재단 
-```
-
-## WEB UI
-- 서비스 개발을 위한 디렉토리 구성 : 웹브라우저 렌더링에 필요한 JS와 CSS파일의 구성방법 이해. 
-디렉토리 구성 = 환경 설정.  
-JS파일 구성 : 만약 JS가 코드가 많지 않다면, 한 페이지에 모두 표현하는 것도 좋다. 아니면 의미에 맞게 구분하는 방법도 있다.  
-ex) 보통 HTML 상단, head 태그에 위치한다. DOM 렌더링 위해 미리 CSS 팡일을 로딩해야 하기 때문이다.  
-그 다음엔 JS는 HTML 하단 , body 태그 닫히기 전에 위치한다. CSS와 HTML을 이용한 화면의 배치 크기를 렌더링 할 때 방해 하지 않기 위해서다.  
+- JS파일 구성 : 
+  - 만약 JS가 코드가 많지 않다면, 한 페이지에 모두 표현하는 것도 좋다. 아니면 의미에 맞게 구분하는 방법도 있다.  
+    - ex) 보통 HTML 상단, head 태그에 위치한다. 
+    - DOM 렌더링 위해 미리 CSS 팡일을 로딩해야 하기 때문이다.  
+    - 그 다음엔 JS는 HTML 하단 , body 태그 닫히기 전에 위치한다. 
+    - CSS와 HTML을 이용한 화면의 배치 크기를 렌더링 할 때 방해 하지 않기 위해서다.  
 
 ```
-이상적인 코드 이렇게 분리하자.  
+//이상적인 코드 분리 
+
 <html>
   <head>
     <link rel="stylesheet" href="./css/main.css">
-    
  </head>
+
  <body>
       <script src="js/main.js"></script>
  </body>
 </html>
 ```
-## DOMContentLoaded : 로딩 이후에 JS동작이 이뤄지는 것이 일반적. JS 가장 적절한 실행 타이밍은?
+##< DOMContentLoaded >
+
+로딩 이후에 JS동작이 이뤄지는 것이 일반적이다. JS 가장 적절한 실행 타이밍은? 
 - DOMContentLoaded : DOM Tree 분석이 끝나자마자 이벤트 발생. (document)
-- Load : DOM Tree말고 그 외 모든 자원이 다 받아져 렌더링(화면 표시)까지 다 끝난 시점에서 Load 발생.  
+  
+- Load : DOM Tree말고 그 외 모든 자원이 다 받아져 렌더링(화면 표시)까지    다 끝난 시점에서 Load 발생.  
 모든 이벤트들 .. 모두 로드 했을 때를 알린다. (window)
 
-! script 추가는 DOM이 정의된 HTML코드 뒤에 작성해야 알맞게 DOM node를 찾을 수 있다.  
+- tip: script 추가는 DOM이 정의된 HTML코드 뒤에 작성해야 알맞게 DOM    node를 찾을 수 있다.
 
-보통 html, css... 등 브라우저 렌더링 작업이 모두 끝난 후, 이벤트 실행이나 노드변경 찾는 등의 JS는 html 맨 아래 쪽에 위치 시킨다.   
-하지만 이렇게 해도 DOMTree가 전부 구성 되기 전에 JS 실행 되는 경우가 있다.  
-DOMContentLoaded 이벤트는 DOM Tree가 모두 로드 되어 구성됐을 때를 알린다.  
-때문에 DOMContentLoaded 이벤트 안에 DOM Tree 모두 로드 후 실행 시킬 일들을 써주면 좋다. (노드 찾기 , 구성등..)  
+   - 보통 html, css... 등 브라우저 렌더링 작업이 모두 끝난 후, 이벤트 실행이나 노드변경     
+     찾는 등의 JS는 html 맨 아래 쪽에 위치 시킨다.   
+   - 하지만 이렇게해도 DOMTree가 전부 구성 되기 전에 JS 실행 되는 경우가 있다.  
+   - DOMContentLoaded 이벤트는 DOM Tree가 모두 로드 되어 구성됐을 때를 알린다.  
+   - 때문에 DOMContentLoaded 이벤트 안에 DOM Tree 모두 로드 후 실행 시킬 일들을 써주면 좋다. (노드 찾기 , 구성등..)  
 
-```
+```C
 document.addEventListener("DOMContetLoaded", function(){
   startSomething();
   initFoo();
@@ -900,56 +889,68 @@ document.addEventListener("DOMContetLoaded", function(){
 });
 ```
 
-## Event delegation (기법) : 부모 엘리먼트에 위임한다.
+## < Event delegation (기법) : 부모 엘리먼트에 위임한다.> 
+
 list가 각자 UI에 각각 비슷한 이벤트를 걸어 처리해야 한다면 어떻게 해야할까 ?  
 이벤트 등록을 효율적으로 어떻게 할까 ? for문을 쓸까?
 
---> Event delegation 이라는 바인딩 방식이 적용 되어 맨 상위 엘리먼트(부모)에 이벤트 리스너 등록하면 하위 엘리먼트(자식) 클릭해도 된다!
+   - Event delegation 이라는 바인딩 방식이 적용 되어 
+     맨 상위 엘리먼트(부모)에 이벤트 리스너 등록하면 하위 엘리먼트(자식) 클릭해도 된다!
 
-+) firstChild / firstElementChild 차이
-firstElementchild : 공백 확인
+- firstChild / firstElementChild 차이
+    - firstElementchild : 공백 확인
 
-브라우저가 기억해야 할 이벤트 핸들러가 많이지면 메모리사용이 비효율적으로 된다.
-그럼 어떻게? -> target정보를 이용하자
-target : 내가 클릭한 지점 정보.
+- 브라우저가 기억해야 할 이벤트 핸들러가 많이지면 메모리사용이 비효율적으로 된다.
+  그럼 어떻게? -> target정보를 이용하자
+  - target : 내가 클릭한 지점 정보.
 
-- Bubbling : 하위 엘리먼트를 클릭 했더라도 상위 엘리먼트 쭉쭉 검색 올라가면서 그 중에 등록한 이벤트 리스너가 있다면 실행된다.
-기본적으로 버블링 순서로 이벤트가 발생된다.
+- Bubbling 
+  - 하위 엘리먼트를 클릭 했더라도 상위 엘리먼트 쭉쭉 검색 올라가면서 그 중에 등록한 이벤트   
+    리스너가 있다면 실행된다.
+  - 기본적으로 버블링 순서로 이벤트가 발생된다.
 
-- Capturing : 버블링과 반대로 이벤트 발생.
-캡처링으로 이벤트 발생 시키고 싶다면 addEventListener 메서드 3번째 인자값을 true 지정.
+- Capturing 
+  - 버블링과 반대로 이벤트 발생.
+  - 캡처링으로 이벤트 발생 시키고 싶다면 addEventListener 메서드 3번째 인자값을 true 지정.
 
+```
 [발생 순서] 
 ex) Element 1 > Element 2 > Element 3 이라면,  
 캡처링 : 1 -> 2 -> 3 / 버블링 : 3 -> 2-> 1
-
+```
+```c
 <예제 코드>
+
 ul.addEventListener("click", function(evt){
    // target이 image이면 src를 추출해서 출력한다.
+
    var target = evt.target;
    if(target.tagName === "IMG") {
       log.innerHTML = "IMG URL은, " + target.src;
    }
-
 })
+```
 
 만약 이미지들 사이 패딩을 클릭해도 이미지 정보가 나오게 하고 싶다면 ,
-
+```c
 <예제 코드>
+
 ul.addEventListener("click", function(evt){
    // target이 image이면 src를 추출해서 출력한다.
+
    var target = evt.target;
    if(target.tagName === "IMG") {
       log.innerHTML = "IMG URL은, " + target.src;
    } else if (target.tagName === "LI") {
       log.innerHTML = "IMG URL은," + target.firstElementChild.src;
    }
-
 })
+```
 
+## < HTML templating 작업 >
 
-## HTML templating 작업
-서버로부터 받은 데이터를 화면에 반영해야 할 때가 많은데, 
+서버로부터 받은 데이터를 화면에 반영해야 할 때가 많다.
+
 HTML 형태는 그대로인데 데이터만 변경되는 경우는 어떻게 처리해야 효율적일까?
 
 - HTML templation :  HTML과 데이터를 섞어서 표현하는 방법.
@@ -959,18 +960,15 @@ HTML 형태는 그대로인데 데이터만 변경되는 경우는 어떻게 처
 
 서버에서 보내준 JSON Data을  HTML Template 에 알맞게 넣어주면 이것이 HTML templating !
 
-- String의 replace
-.replace() 메서드를 쓴다.
+- String의 replace : .replace() 메서드를 쓴다.
+  - regular expression 을 쓰면 더 막강해진다.
+  - repalce는 메서드 체이닝 방식으로 호출하면서 풀이 할 수 있다. *메서드 체이닝*
 
-+) regular expression 을 쓰면 더 막강해진다.
+data가 배열 형태로 여러 개면 간단한 반복문 또는 forEach같은 메서드 사용.
 
-repalce는 메서드 체이닝 방식으로 호출하면서 풀이 할 수 있다.
-*메서드 체이닝*
-
-data가 배열 형태로 여러개면 간단한 반복문 또는 forEach같은 메서드 사용.
-
+```c
 <예제 코드>  
-~~~
+
 var data = {
               title: "hello",
               content : "chicken"
@@ -987,20 +985,22 @@ var html =
 html.replace("{title}", data.title)
     .replace("{content}", data.content)
     .replace("{price}", data.price);
-~~~
+```
 
 **어떻게 템플릿을 보관 할 수 있을까?**
+
 -> JS를 정적 데이터로 html로 넣는 건 좋지않다. 다음 두가지 방법이 있다.
 
-1) 서버에 file로 보관헤서 Ajax로 요청 받아온다.
+1) 서버에 file로 보관해서 Ajax로 요청 받아온다.
 2) HTML 코드 안에 숨겨둔다
 
 HTML script태그는 type이 javascript가 아닌건 렌더링 안하고 무시한다.  
 이 속성을 이용해 type은 내맘대로 쓰고 HTML Template을 숨겨둔다.!  
 추가로 ES6에서 템플릿 리터럴이라는건 repalce를 안쓰고 편하게 된다.
 
+```c
 <예제 코드>  
-~~~
+
 <script id="template-list-item" type="text/template">
  <li>
   -내용-
@@ -1029,42 +1029,50 @@ for(var i =0; i< data.length; i++){
 }
 
 document.querySelector(".content").innerHTML = resultHTML;
-~~~
+
 
 +) innerHTML말고 특정 부위에 넣고싶을 때 쓰는 메서드는 insertAdjacentHtml 이나 insertBefore....
+```
 
-
-## Tab UI를 만들기 위한 HTML과 CSS 구조전략
+## < Tab UI를 만들기 위한 HTML과 CSS 구조전략 >
 
 - Tab UI Component
 
-+) tap UI 클릭시 ajax로 데이터를 받아올 때, 매번 똑같은 데이터를 새로 받아오지말고
-이미 가져온 데이터는 배열로 저장하고 재사용 하도록 하자 -> 캐쉬 기능
+-  tap UI 클릭 시, ajax로 데이터를 받아올 때, 매번 똑같은 데이터를 새로 받아 오지말고 이미 가져온 데이터는 배열로 저장하고 재사용 하도록 하자 -> **캐쉬 기능**
 
-## Spring (프레임워크)
+## < Spring 프레임워크 >
 
-프레임워크 : 반제품.   
-스프링프레임워크는 약 20개의 모듈로 구성, 모듈화가 잘돼있다. (모듈을)전부 다 알 필요 없고,   
-필요할 때 필요한 것을 사용하자.  
-+) AOP 지원해준다.
+- 프레임워크 : 반제품.   
+- 스프링프레임워크는 약 20개의 모듈로 구성, 모듈화가 잘 돼있다. 
+  
+  (모듈을) 전부 다    알 필요 없고, 필요할 때 필요한 것을 사용하자.  
+  +) AOP 지원해준다.
  - AOP 란? 
    - Aspect Oriented Programing. 관점지향프로그래밍. 
+   
    - 기능을 핵심 비즈니스기능과 공통기능으로 구분하고, 공통 기능을 개발자의 코드 밖에서 필요한 시점에 적용하는 프로그래밍 방법. 
-   - 초간단 AOP 적용법 3가지 : 1) spiring-boot-starter-aop dependency적용하기 2) 어노테이션 이용 3) 공통기능을 정의하고 공통기능이 사용될 시점 정의.. 
-   - mvc로 작성해놓는게 핵심로직 그 외 aop패키지로 빠져있는 것이 공통 로직. 기존에 작성한 핵심 비즈니스 로직에는 AOP때문에 단 한글자도 코드가 변경되는 것이 있으면 안된다. 
+   
+   - 초간단 AOP 적용법 3가지 : 
+     - 1) spiring-boot-starter-aop dependency적용하기 
+     - 2) 어노테이션 이용 3) 공통기능을 정의하고 공통기능이 사용될 시점 정의.. 
+   
+   - mvc로 작성해놓는게 핵심로직 그 외 aop패키지로 빠져있는 것이 공통 로직.
+     기존에 작성한 핵심 비즈니스 로직에는 AOP때문에 단 한글자도 코드가 변경되는 것이 있으면 안된다. 
+   
    - 어노테이션 정의를 통해 어떤 메서드들이 AOP를 적용받을 것인지 적용.. 
 
-[AOP 와 인스트루멘테이션(Instrumentation)]
+**[AOP 와 인스트루멘테이션(Instrumentation)]**
+
 - spring-AOP : AOP 얼라이언스와 호환되는 방법. AOP 지원.
 - spring-aspects : AspetJ와의 통합 제공. 
 - spring-intrument: 인스트루멘테이션을 지원하는 클래스와 특정 WAS와 사용하는 클래스로 더 구현체 제공.  
                     참고로 BCI(Byte Code Instrumentations)은 런타임이나 로드(Load)때 클래스의 바이트 코드에 변경을 가하는 방법이다.  
                     
-[메시징 Messaging]
--spring-messaging : 스프링 프레임워크4는 메시지 기반 어플리케이션 작성 할 수 있는 Message, MessageChannel, Messagehandler 등 제공.  
-                    또한, 해당 모듈에는 메소드에 메시지 맵핑하기 위한 어노테이션 포함되어 있으며, Spring MVC어노테이션과 유사하다.  
+**[메시징 Messaging]**
+  - 스프링 프레임워크4는 메시지 기반 어플리케이션 작성 할 수 있는 Message, MessageChannel, Messagehandler 등 제공.  
+  - 또한, 해당 모듈에 는 메소드에 메시지 맵핑하기 위한 어노테이션 포함되어 있으며, Spring MVC어노테이션과 유사하다.  
                     
-[데이터 엑서스 (Data Access)/ 통합(Integration) 계층 ]
+**[데이터 엑서스 (Data Access)/ 통합(Integration) 계층 ]**
 
 - 데이터 엑세스/통합 계층은 JDBC , ORM , OXM , JMS 및 트랜잭션 모듈로 구성되어 있다. 
 - spring-jdbc : 자바 JDBC프밍을 쉽게 할 수 있도록 기능을 제공.  
@@ -1074,68 +1082,81 @@ document.querySelector(".content").innerHTML = resultHTML;
 - spring-jms : 메시지 생성 (producing) 및 사용(consuming)을 위한 기능을 제공, Spring framework4.1부터 spring-messaging 모듈과의 통합을 제공. 
 
 **[스프링 웹 계층]**
+
 - spring-web 모듈 : 멀티파트 파일 업로드  / 서블릿 리스너 등 웹 지향 통합 기능 제공. HTTP클라이언트와 Spring의 원격 지원 위한 웹 관련 부분을 제공한다. 
+
 - spring-webmvc 모듈 : 다른 말로 Web-servlet모듈. Spring MVC 및 REST 웹 서비스 구현.
+
 - spring-websocket 모듈 : 웹소켓 지원.
+
 - spring-webmvc-portlet 모듈: 포틀릿 환경에서 사용할 MVC 구현 제공.
 
-**[스프링 프레임워크 핵심 개념]**
+### [스프링 프레임워크 핵심 개념]
 
-- Container 
-  - 컨테이너는 보통 인스턴스 생명주기 관리한다. 
+- Container  
+  - 컨테이너는 보통 인스턴스 생명주기 관리한다.
   - 생성된 인스턴스들에게 추가적인 기능 제공한다.   
   - 인스턴스의 생성 부터 소멸까지 내가 직접하는 것이 아니라 컨테이너가 알아서 해준다.  
   
 앞 시간에서 배웠듯이 Tomcat이라는 WAS가 가지고 있는 서블릿 컨테이너가 대신 servlet 생성 ~ 소멸 관리한다.  
-WAS는 웹브라우저로부터 servlet URL에 해당하는 요청을 받으면 Servlet을 메모리에 올린 후 실행 : 이 일을 WAS안에 Servlet 컨테이너가  해준다는 것.  
+
+WAS는 웹브라우저로부터 servlet URL에 해당하는 요청을 받으면 Servlet을 메모리에 올린 후 실행 <- 이 일을 WAS안에 Servlet 컨테이너가  해준다는 것.  
+
 - IoC (Inversion of Control) (제어의 역전) 
   - inversion : 도치, 역전. 
-  - 개발자는 프로그램의 흐름을 제어하는 코드를 작성하는데, 이 흐름의 제어를 개발자가 하는 것이 아닌 다른 프로그램이 그 흐름을 제어하는 것을 IoC라     고 한다.  예를 들어 , 일상에 있는 tv 리모컨의 기본적인 구성과 기능 인터페이스가 동일 한 것과 ...
-    TV공장을 만든다. -> 이 부분을 spring이 대신 해준다.    
+  - 개발자는 프로그램의 흐름을 제어하는 코드를 작성하는데, 이 흐름의 제어를 개발자가 하는 것이 아닌 다른 프로그램이 그 흐름을 제어하는 것을 IoC라고 한다.  
+  예를 들어 , 일상에 있는 tv 리모컨의 기본적인 구성과 기능 인터페이스가 동일 한 것과 ... (중략)
+  인터페이스를 통일한 TV 공장 .
+  TV공장을 만든다. -> 이 부분을 spring이 대신 해준다.    
 
   - 스프링에서 공장 역할을 하는 2가지 
     - 대신해서 착착 해주는 컨테이너를 만들어주는 공장을 만들어야 하는데 스프링이 그 공장을 대신 만들어준다.  
-       사용자는 그 공장 이용해서 만들어가면 된다.
+      사용자는 그 공장 이용해서 만들어가면 된다.
        
     1) BeanFactory: 완전 간단 기능만 있음.  
     2) ApplicationContext : 빈팩토리 +a. 빈팩토리가 가지고 있는 기능 + 트랜잭션 처리, AOP처리 등 가능. 
        그래서 더 많이 쓰인다.  
        
-- DI (Dependency Injection ) (의존성 주입)  
-  - 컨테이너가 생성한 객체를 받아 온다.     
+- DI (Dependency Injection ) (의존성 주입) 
+
+  - 컨테이너가 생성한 객체를 받아 온다.    
   - 공장에서 만들어진 인스턴스를 가져올 수 있는 방법 중 하나이다.    
-  - DI는 클래스 사이 의존 관계를 빈(Bean)설정 정보를 바탕으로 컨테이너가 자동으로 연결해주는 것을 말한다.    
+  - DI는 클래스 사이 의존 관계를 빈(Bean)설정 정보를 바탕으로 컨테이너가 자동으로 연결해주는 것을 말한다.
+
 IoC : 프로그램이 개발자에게 틀을 강요해서 그 형식으로 만들게 하는것
 DI : 강요하는 내용들  ex) 박스를 만들때 높이는 4cm, 너비는 10cm로 해라 등등
 
-장점 : 모양이 정형화 되므로 유지및 관리가 쉽다,
+**장점 : 모양이 정형화 되므로 유지및 관리가 쉽다,**
 
-+) 프레임워크와 라이브러리의 차이점은 ?  
-프레임워크는 제어의역전 IoC 개념이 적용된 대표 기술. 프레임워크는 특정 sw문제를 해결 위해 상호 협럭하는 클래스와 인터페이스의 집합이라 할 수 있으며, 프로그래머가 완성시키는 작업을 해야한다.  
-라이브러리는 단순 활용 가능한 도구의 집합이다.  개발자가 만든 클래스에서 호출해 사용하고 클래스들을 나열해서  
-필요한 클래스를 불러서 사용하는 방식을 취한다. 
+***프레임워크와 라이브러리의 차이점은 ?***
 
-큰 차이 점 => 제어 흐름에 대한 주도성이 누구에게/ 어디에 있는가 즉, '어플리케이션의 흐름을 누가 쥐고있는가'.  
-라이브러리를 사용하는 어플리케이션 코드는 어플리케이션 흐름을 직접 제어한다. 필요할 때 능동적으로 라이브러리를 사용 할 뿐.  
-반면에 프레임워크는 거꾸로 , 어플리케이션 코드가 프레임워크에 의해 사용되는 것이다.   
-프레임워크 위에 개발한 클래스를 등록해두고, 프레임워크가 흐름을 주도하는 중에 만든 코드를 사용하는 방식.  
-어플리케이션 코드는 프레임워크가 짜놓은 틀에서 수동적으로 동작해야 한다.   = 프레임워크에는 제어의 역전 개념이 적용되어 있어야 한다.  
+- 프레임워크는 제어의역전 IoC 개념이 적용된 대표 기술. 
+프레임워크는 특정 sw문제를 해결 위해 상호 협럭하는 클래스와 인터페이스의 집합이라 할 수 있으며, 프로그래머가 완성시키는 작업을 해야한다.  
 
+- 라이브러리는 단순 활용 가능한 도구의 집합이다.  
+개발자가 만든 클래스에서 호출해 사용하고 클래스들을 나열해서 필요한 클래스를 불러서 사용하는 방식을 취한다. 
 
-#### Spring MVC
-- MVC :
-Model : 뷰가 렌더링하는데 필요한 데이터. 예) 상품목록..
-View : 웹 어플에선 실제로 보여지는 부분. JSP ,XmL등으로 표현한다.
-Controller : 사용자의 액션에 응답하는 컴포넌트. 모델 업뎃, 다른 액션을 수행.
+- 큰 차이 점 => 제어 흐름에 대한 주도성이 누구에게, 어디에 있는가. 즉, '어플리케이션의 흐름을 누가 쥐고있는가'.
+ 라이브러리를 사용하는 어플리케이션 코드는 어플리케이션 흐름을 직접 제어한다. 필요할 때 능동적으로 라이브러리를 사용 할 뿐.  
+ 반면에 프레임워크는 거꾸로 , 어플리케이션 코드가 프레임워크에 의해 사용되는 것이다.   
+ 프레임워크 위에 개발한 클래스를 등록해두고, 프레임워크가 흐름을 주도하는 중에 만든 코드를 사용하는 방식.  
+ 어플리케이션 코드는 프레임워크가 짜놓은 틀에서 수동적으로 동작해야 한다.   
+ *= 프레임워크에는 제어의 역전 개념이 적용되어 있어야 한다.*   
 
-- MVC MOdel 1 아키테처
+## < Spring MVC >
+
+- Model : 뷰가 렌더링하는데 필요한 데이터. 예) 상품목록..
+- View : 웹 어플에선 실제로 보여지는 부분. JSP ,XmL등으로 표현한다.
+- Controller : 사용자의 액션에 응답하는 컴포넌트. 모델 업뎃, 다른 액션을 수행.
+
+1) MVC Model 1 아키텍처
 
 (그림)
 
-java bean 을 이용해서 db를 이용 . JDBC의 Role Dao 와 유사
-문제점 : jsp 에 java , html이 섞여 있어서 유지 보수 힘듬
+- java bean 을 이용해서 db를 이용 . JDBC의 Role Dao 와 유사.
+- 문제점 : jsp 에 java , html이 섞여 있어서 유지 보수 힘듬
 
-- MBC Model 2 아키텍처
+2) MBC Model 2 아키텍처
 
 (그림)
 
@@ -1278,17 +1299,22 @@ Request에다 값을 넣어서 사용하는 것보다 이 컴포넌트를 쓰는
 - webmvc  
 - 버전 통일 위해 프로퍼티 추가
 
-- DispatcherServlet이 FrontController이다 라고 설정하기  
+- DispatcherServlet이 FrontController이에요 라고 설정해주기.
+  
 -> 얘도 서블릿이기 때문에 web.xml 파일에 설정 할 수 있다.  
 두 가지 방법이 있다.
+
 1) web.xml 파일에 dispatcherServlet 설정하는 방법  
 어떤 일을 할 지 알려주는 것...  
 java config spring설정 읽어 들이도록 . javaConfig 를 읽어온다.
-urlpatten 에 맵핑할 url 넣으면 servlet-name 과 같은 name으로 매핑되어있는 servlet -class가 실행 된다 : 지난 강의 참조하기
-슬러시를 쓰면 슬러시덕분에 모든 요청을 받을 수 있다.
+urlpatten 에 맵핑할 url 넣으면 servlet-name 과 같은 name으로 매핑되어있는 servlet -class가 실행 된다 : 지난 강의 참조하기.
+
+<url-pattern>/</url-pattern>슬러시를 쓰면 슬러시덕분에 모든 요청을 받을 수 있다.
 
 2)  WebApplicationInitializer 를 이용해서 구현하기 : 수업에서 자세히 안다룸.
 단점 : 첫 구동이 오래 걸릴 수 있다.
+
+- 디스패처서블릿은 해당 설정 파일을 읽어들여서 내부에서 spring 컨테이너인 ApplicaationContext를 생성하게 된다.
 
 **[쓰이는 어노테이션들]**
 - @Configuration  
@@ -1512,6 +1538,7 @@ RssChannelHttpMessageConverter
  - 사용자가 임의로 Messageconverter를 사용하도록 하려면 WebMvcConfiguerAdapter의 confitereMessageConverters메서도를 오버라이딩 하도록 한다.
 
 --- 
+
 
 ### 오프라인 강의 - BE : spring을 spring boot 2.x 바꾸기
 
