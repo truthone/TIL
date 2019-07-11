@@ -1286,10 +1286,10 @@ Request에다 값을 넣어서 사용하는 것보다 이 컴포넌트를 쓰는
 
 ### Spring MVC 실습
 
-**(실습 내용)**  
+**(실습 할 내용)**  
 
-웹브라우저에게 url 요청 후  - > 2개 값 입력 받을 수 있는 창& 버튼 있는 화면 출력  
--> 웹브라우저에 2개 값 입력 하고 버튼 클릭하면 어쩌구 URL로 입력값 post로 서버에게 보내고  
+웹 브라우저에게 url 요청 후  - > 2개 값 입력 받을 수 있는 창 & 버튼 있는 화면 출력  
+-> 웹 브라우저에 2개 값 입력 하고 버튼 클릭하면 어쩌구 URL로 입력값 post로 서버에게 보내고  
 -> 서버는 2개 값 더 해서 결과값 JSP에게 request scope로 전달해서 출력하긔  
 
 1. [pom.xml 설정 하기]
@@ -1297,48 +1297,78 @@ Request에다 값을 넣어서 사용하는 것보다 이 컴포넌트를 쓰는
 - 라이브러리 : jstl, jsp, servlet  
 - spring-context  
 - webmvc  
-- 버전 통일 위해 프로퍼티 추가
+- 버전 통일 위해 프로퍼티 추가 등등 다 추가하기
+- maven - update project
+- .setting > facet > version 2.3 -> 3.1 로 바꾸고 이클립스 재시작
 
-- DispatcherServlet이 FrontController이에요 라고 설정해주기.
+2. 중요 ) DispatcherServlet이 FrontController 라고 설정해주기.
   
--> 얘도 서블릿이기 때문에 web.xml 파일에 설정 할 수 있다.  
-두 가지 방법이 있다.
+    -> 얘도 서블릿이기 때문에 web.xml 파일에 설정 할 수 있다.  
 
-1) web.xml 파일에 dispatcherServlet 설정하는 방법  
-어떤 일을 할 지 알려주는 것...  
-java config spring설정 읽어 들이도록 . javaConfig 를 읽어온다.
-urlpatten 에 맵핑할 url 넣으면 servlet-name 과 같은 name으로 매핑되어있는 servlet -class가 실행 된다 : 지난 강의 참조하기.
+       1) web.xml 파일에 dispatcherServlet 설정하는 방법  
+          어떤 일을 할 지 알려주는 것...  
+          java config spring설정 읽어 들이도록 . javaConfig 를 읽어온다.
+          urlpatten 에 맵핑할 url 넣으면 servlet-name 과 같은 name으로
+          매핑되어있는 servlet -class가 실행 된다  (지난 서블릿 강의 참조하기.)
 
-<url-pattern>/</url-pattern>슬러시를 쓰면 슬러시덕분에 모든 요청을 받을 수 있다.
+          <url-pattern>/</url-pattern>슬러시를 쓰면 슬러시덕분에 모든 요청을
+          받을 수 있다.
 
-2)  WebApplicationInitializer 를 이용해서 구현하기 : 수업에서 자세히 안다룸.
-단점 : 첫 구동이 오래 걸릴 수 있다.
+       2)  WebApplicationInitializer 를 이용해서 구현하는 방법  
+           수업에서 자세히 안다룸.
+           단점 : 첫 구동이 오래 걸릴 수 있다.
 
-- 디스패처서블릿은 해당 설정 파일을 읽어들여서 내부에서 spring 컨테이너인 ApplicaationContext를 생성하게 된다.
+- DispatcherServlet에 대한 설정 web.xml 에 하고 DispatcherServlet 읽어들어야 할 설정을 별도로 하는데 이 설정을 java config로 한다. 
+
+- DispatcherServlet은 해당 설정 파일을 읽어들여 내부에서 spring 컨테이너인 ApplicationContext를 생성하게 된다.
+
+
 
 **[쓰이는 어노테이션들]**
+--- 설정 관련 어노테이션 --- 
+
 - @Configuration  
-: 이 어노테이션을 통해 자바 config 파일이구나 알려주는 역할 이다.
+: 이 어노테이션을 통해 '자바 config 파일'이라고 알려주는 역할이다.
 
 - @EnableWebMvc  
-: 디스패처서블릿에서 필요한 애들 & web에 필요한 빈들 자동 설정 해준다.
-xml로 설정의 <mvc:annotation-driven/>와 동일한 애 -> 수업시간엔 안한다.
-
-..버거월  ㅠㅠ 익숙해진 후 찾아보자
-
+: DispatcherServlet에서 필요한 애들 & web에 필요한 빈들 대부분 자동 설정 해준다.
+ 
 - @ComponentScan  
-: Spring MVC에서 handler = controller 찾아야 하는데 componentScan 어노테이션 사용해서
-내가 직접 만들었던 빈을 이용해 직접 등록도 되고 ..  
-@ComponentScan (basePackages = {}) -> basePackages 꼭 설정 해줘야 어디서부터 찾을 지 알 수 있다.  
+  - Spring MVC에서 handler = controller 찾아야 하는데 ComponentScan   
+    어노테이션 사용해서 내가 직접 만들었던 빈을 이용해 직접 등록도 되고 .. 
+  - Controller / Service/ Repository / Component 애노 붙은 클래스 찾아서 스프링 컨테이너가 관리하게 해줌 
+  - 이번에 작성할 컨트롤러에는 URL Mapping 정보가 어노로 붙어있을 것
+  - 이 URL Mapping 정보는 DispatcherServlet이 관리하는 RequestMapping 객체들로 설정된다. 
+  - 이를 위해 여기서 DefaultAnnotationHandlerMapping & RequestMappingHandlerMapping 구현체가 사용된다. -> 두 구현체는 어노를 사용해서 매핑 관계 찾는 강력한 기능을 가짐. 
+  - 매핑 하기 위한 RequestMapping 어노 붙은 클래스 또는 메서드 찾아서 -> Handler Mapping 
+  (서버로 들어오는 요청을 어느 핸들러로 전달할지 결정해준다.)객체 생성 해준다.
+  - @ComponentScan (basePackages = {}) -> basePackages 꼭 설정 해줘야 
+    어디서부터 찾을 지 알 수 있다.  
 
 - @EnableWebMvc  
-: 설정 자동 로드 됨 . 수동 설정 하고 싶다면 다른거 있음.  
+:대부분 설정 자동 로드 됨 . 수동 설정 하고 싶다면 다른거 있음.  
 이거 안쓰면 webMvcContextConfit-support 상속 받아야함.
 
-- @Controller  
-: 이거 붙여야 컨트롤러인줄 안다. 맵핑 위해 @RequestMapping 서블릿 url지정시 @Servlet 관련 어노테이션 붙이는거랑 같다.
+--- Handler class인 controller 작성 위한 어노 ---
 
-- addResourceHandlers
+- @Controller  
+  - 클래스 위에 이거 붙여야 컨트롤러인줄 안다.
+  - 들어온 요청이 무슨 URL이 보낸 요청인지 알아내 실제 처리해야하는 컨트롤러가 무엇이고 구현하고 있는 메서드가 뭔지 알아내 맵핑하기 위해 @RequestMapping 사용. 
+  - 서블릿 url지정시 @Servlet 관련 어노테이션 붙이는거랑 같다.
+  ```c
+   Http Method와 연결하는 방법
+  @RequestMapping("/users", method=RequestMethod.POST)
+  //유저스라는url요청들어오면
+  //요청에 대한 메서드가 POST방식으로 들어오면
+  //이 리퀘어노 실행해주세요
+  ```
+  - 그 밖에 Http특정헤더, param, Content-Type Header 등 연결 방법 있음. 
+  - addResourceHandlers
+---
+[실습]
+1. 설정 모아두는 config 패키지 > WebMvcContextConfigutraion 클래스 >
+
+
 
 **반드시 필요한 부분**
 ~~~
