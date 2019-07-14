@@ -1358,7 +1358,7 @@ Request에다 값을 넣어서 사용하는 것보다 이 컴포넌트를 쓰는
   ```c
    Http Method와 연결하는 방법
   @RequestMapping("/users", method=RequestMethod.POST)
-  //유저스라는url요청들어오면
+  //users라는url요청들어오면
   //요청에 대한 메서드가 POST방식으로 들어오면
   //이 리퀘어노 실행해주세요
   ```
@@ -1369,30 +1369,28 @@ Request에다 값을 넣어서 사용하는 것보다 이 컴포넌트를 쓰는
 1. 설정 모아두는 config 패키지 > WebMvcContextConfigutraion 클래스 >
 
 
-
 **반드시 필요한 부분**
-~~~
+```c
 - registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);  
                       ----"/css/**"-------이렇게 들어오는 url요청은 ------"/css/----- 여기서 찾아요 라는 뜻임  
-~~~
-
+```
+```c
 - registry.addViewController("/").setViewName("main");  
  -> "/" 로 들어오는 애들은 main을 찾아줘요  
-
+```
 - 리졸버 : 뷰 그릴수 있게 찾아주기 (?)  
-~~~
+```c
 어쩌구저쩌구 - ResourceViewResolver(){
    InternalResourceViewResolver resolver  = new Internal ResourceViewResolver();  
    resolver.setPrefix("/WEB-INF/views/"); // .setViewName("main") "main" 앞에 "/WEB-INF/views/" (찾는 거 해당 경로) 붙이기
    resolver.setSuffix(".jsp")// .setViewName("main") "main" 뒤에 ".jsp" 붙d여서 찾을 수 있도록
 }
-~~~
+```
 
-- 디스패처를 프론트 컨트롤러라고 설정해주기  
-web.xml  열어서.. 20분 쯤 부터
-/ 로 들어오면  
-init-param 부분에서 앞서 webMvcContextConfiguration 파일로 설정 잡아준거 등록.  
-어쩌구-ApplicationConfiguration 이건 beans공장.  
+- DispatcherServlet을 Front Controller라고 설정해주기  
+  web.xml  열어서.. 20분 쯤 부터 / 로 들어오면  
+  init-param 부분에서 앞서 webMvcContextConfiguration 파일로 설정 잡아준거 등록.  
+  어쩌구-ApplicationConfiguration 이건 beans공장.  
 
 
 **[Controller 작성 실습]**  
@@ -1400,175 +1398,187 @@ init-param 부분에서 앞서 webMvcContextConfiguration 파일로 설정 잡�
 - controller 클래스에 꼭 @Controller 어노테이션 붙혀주기.    
 - @GetMapping(path  = "/dfdf") : get 방식으로 들어 올 때 쓰는 어노테이션.   
 - @PostMapping(path  = "/dfdf") : post 방식으로 들어올때 쓰는 어노테이션.  
-
-(다양한 Controller 메소드 인수 타입 / 어노테이션)  
+  (다양한 Controller 메소드 인수 타입 / 어노테이션)  
 
 - @PathVariable  : 패스에서 받은 변수명을 받기 위한 place holder가 필요함.  
-주의할 점 : 넣어 준 이름과 파라미터 명 잘 매치 되게 해줘야 스프링이 잘 넣어준다.  
+ *주의할 점 : 넣어 준 이름과 파라미터 명 잘 매치 되게 해줘야 스프링이 잘 넣어준다.  
 
-modelMap. 쓰면 requestScope에 알아서 넣어준다. 스프링의 다양한 객체들을 이용해보자.  
+- modelMap. 쓰면 requestScope에 알아서 넣어준다. 스프링의 다양한 객체들을 이용해보자.  
 
-**+) EL 표기법은 2.3버전땐 필수가 아니었다. web 버전 3.1로 했는지 체크하기**  
+**+) EL 표기법은 2.3버전땐 필수가 아니었다. web 버전 3.1로 했는지 체크하기!**  
 
-@RquestMapping @GetMapping @PostMapping ..
-매핑하는 다양한 방식이 있다.
+- @RquestMapping @GetMapping @PostMapping .. 매핑하는 다양한 방식이 있다.
 
-@RequestParam 통해서 하나 하나 받는거 말고
-@ModelAttribute 어노테이션 붙여서 한꺼번에 가방처럼 들고다니는 DTO 를 만들어준다.
+- @RequestParam 통해서 하나 하나 받는거 말고
+  @ModelAttribute 어노테이션 붙여서 한꺼번에 가방처럼 들고다니는 DTO 를 만들어준다.
 
-스프링이 알아서 넣기 때문에 form에서 쓴 name과 dto에서 쓴 name이 반드시 같아야 한다.
-private 로 선언했는데 스프링이 접근하기 때문에 게터세터를 써줘야한다.
-+) toString 을 쓰면 이름표처럼 뭐가 있는지 한번에 출력되게 하면 편하다 .
-
-
-Controller 실습 3번
-@GetMapping("/goods/{id}") -> {id} : 이 부분이 Path Variable
-= url 요청이 왔을때 {id} 라는 path Variable로 받겠다.
+- 스프링이 알아서 넣기 때문에 form에서 쓴 name과 dto에서 쓴 name이 반드시 같아야   한다.
+  private 로 선언했는데 스프링이 접근하기 때문에 Getter Setter를 써줘야한다.
+  
+  +) toString 을 쓰면 이름표처럼 뭐가 있는지 한번에 출력되게 하면 편하다 .
 
 
-*180731*
-#### 레이어드 아키텍처
-url 은 다르지만 웹페이지 요소 , 구성이 겹치는 부분이 있다면
+<Controller 실습 3번>
+
+- @GetMapping("/goods/{id}") -> {id}
+
+  : 이 부분이 Path Variable = url 요청이 왔을때 {id} 라는 path Variable로 받겠다.
+
+
+### 레이어드 아키텍처
+Q. url 은 다른데 웹페이지 요소 , 구성이 겹치는 부분이 있다면? 
 Controller에서 중복되는 부분을 처리하려면?
 
-1. 별도의 객체로 분리한다. 2. 별도의 메소드로 분리한다.
+1. 별도의 객체로 분리한다. 
+2. 별도의 메소드로 분리한다.
 
-서비스 객체는 업무와 관련된 객체 = 비지니스 객체
+**서비스 객체 = 업무와 관련된 객체 = 비지니스 객체**
 
-서비스 객체란 ?
-비지니스 로직을 수항해는 메소드를 가지고 있는 객체
-1개의 비지니스 로직 -> 1개의 트랜잭션 동작
-서비스 객체마다 비지니스 메서드를 가지고 있다.
-서비스 객체 는 맞게 비지니스 메서드를 여러개 교차 사용 한다.
-하나의 비지니스 메서드는 트젝 단위로 처리.
+- 서비스 객체란 ?
+  - 비지니스 로직을 수행하는 메소드를 가지고 있는 객체
+  - 1개의 비지니스 로직 -> 1개의 트랜잭션 동작
+  - 서비스 객체마다 비지니스 메서드를 가지고 있다.
+  - 서비스 객체는 알맞게 비지니스 메서드를 여러개 교차 사용 한다.
+  - 하나의 비지니스 메서드는 트젝 단위로 처리.
 
-트랜잭션이란?
-하나의 논리적인 작업을 의미.
-[트랜잭션 특징 4가지]
-1. 원자성
-전체가 성공하거나 / 전체가 실패하는 것 .
-ex) '출금' 기능 안에 작업들을 각각 볼 수 없고 , 이 안의 작업들을 모두 완료 해야 한 개의 기능으로 보는 것.
-+) rollback : 오류 났을 때 앞에 수행 된 작업들을 원래대로 모두 복원 시키는 것.
-+) commit : n번 작업까지 모두 성공했을 때만 정보를 모두 반영하는 것. 작업 반.
-롤백 하거나 커밋 하게 되면 하나의 트잭 처리가 됐다고 하는 것이당 .
+- 트랜잭션이란?
+  - 하나의 논리적인 작업을 의미.
+  - [트랜잭션 특징 4가지]
+    1. 원자성
+     - 전체가 성공하거나 / 전체가 실패하는 것 .
+     ex) '출금' 기능 안에 작업들을 각각 볼 수 없고 , 이 안의 작업들을 모두 완료 해야 한 개의 기능으로 보는 것.
 
-2. 일관성
-트랜잭션의 작업 처리 결과가 일관성 있게 유지 되는 것.
+     - rollback : 오류 났을 때 앞에 수행 된 작업들을 원래대로 모두 복원 시키는 것.
 
-3. 독립성
-둘 이상의 트젝이 동시에 진행 되고 있을 때 어느 하나의 트젝이라도
-다른 트잭 연산에 끼어 들 수 없는 특성. 하나의 특정 트젝이 완료 될때까지
-다른 트젝이 사용 할 수 없다.
+     - commit : n번 작업까지 모두 성공했을 때만 정보를 모두 반영하는 것. 작업 반.
+    롤백 하거나 커밋 하게 되면 하나의 트잭 처리가 됐다고 하는 것이당 .
 
-4. 지속성
-트젝이 성공적으로 완료 됐을 때 , 결과가 영구적으로 유지 되는 특성을 지속성이라한다.
+    2. 일관성
 
--JDBC 프로그래밍에서 트랜잭션 처리 방법-
-DB 연결 된 후 connection 객체의 setAutoCommit메서드를 false로 파라미터 지정하고
-커밋 조건 만족 후 커밋 되도록 조건들을 작성 해준다.
-true면 자동 커밋 된다.
+      - 트랜잭션의 작업 처리 결과가 일관성 있게 유지 되는 것.
 
--스프링에서 트젝 활용-
-@EnableTransactionMAnagement 이 어노테이션을 쓴다.
-특정 트잭매니저를 사용하려면
-TransactionManagementConfigurer를 Java Config파일에서 구현하고 원하는 트젝 매니저를 리턴하도록 한다.
+    3. 독립성
+     - 둘 이상의 트젝이 동시에 진행 되고 있을 때 어느 하나의 트젝이라도
+       다른 트잭 연산에 끼어 들 수 없는 특성.
+
+       하나의 특정 트젝이 완료 될 때까지 다른 트젝이 사용 할 수 없다.
+
+    4. 지속성
+      - 트젝이 성공적으로 완료 됐을 때 , 결과가 영구적으로 유지 되는 특성을       지속성이라한다.
+
+- JDBC 프로그래밍에서 트랜잭션 처리 방법
+
+  - DB 연결 된 후, connection 객체의 setAutoCommit메서드를 false로 파라미터  
+    지정하고
+  - 커밋 조건 만족 후 커밋 되도록 조건들을 작성 해준다. true면 자동 커밋 된다.
+
+<스프링에서 트젝 활용 방법>
+
+- @EnableTransactionManagement 어노테이션을 쓴다.
+- 특정 트잭매니저를 사용하려면
+TransactionManagementConfigurer를 Java Config파일에서 구현하고 원하는 트젝 매니저를 리턴하도록 한다. 
 또는 , 특정 트젝 매니저 객체 생성 시, @Primary 어노테이션 지정.
 
 
-왜 레이어드 아키텍처가 사용될까?
+**Q. 왜 레이어드 아키텍처가 사용될까?**
 
-<각 레이어의 구성요소>
+**<각 레이어의 구성요소>**
 
-Presentatino Layer : 컨트롤러 객체 동작 : 보여지는 걸 구현하는 레이어. 지금 과정에선 web
-Service Layer : 서비스 객체 동작
-Repository Layer : DAO 객체
+- Presentation Layer : 컨트롤러 객체 동작. 보여지는 걸 구현하는 레이어. 
+- Service Layer : 서비스 객체 동작
+- Repository Layer : DAO 객체
 
 무슨 로직을 어디 레이어에 놓아야 하나 .. 앞으로 고민하게 될 것.
 
-*설정의 분리하기 :
-Spring 설정 파일을 프리젠테이션 레이어쪽과 나머지를 분리할 수 있습니다.
+**<설정 분리하기>**
+- Spring 설정 파일을 프리젠테이션 레이어쪽과 나머지를 분리할 수 있다.
 
-web.xml 파일에서 프리젠테이션 레이어에 대한 스프링 설정은 DispathcerServlet이 읽도록 하고, 그 외의 설정은 ContextLoaderListener를 통해서 읽도록 합니다.
+- web.xml 파일에서 프리젠테이션 레이어에 대한 스프링 설정은 DispathcerServlet이 읽도록 하고, 그 외의 설정은 ContextLoaderListener를 통해서 읽도록 합니다.
 
-DispatcherServlet을 경우에 따라서 2개 이상 설정할 수 있는데 이 경우에는 각각의 DispathcerServlet의 ApplicationContext가 각각 독립적이기 때문에 각각의 설정 파일에서 생성한 빈을 서로 사용할 수 없습니다.
+- DispatcherServlet을 경우에 따라서 2개 이상 설정할 수 있는데,
+  이 경우에는 각각의 DispathcerServlet의 ApplicationContext가 각각 독립적이기 때문에 각각의 설정 파일에서 생성한 빈을 서로 사용할 수 없습니다.
+  
+  위의 경우와 같이 동시에 필요한 빈은 ContextLoaderListener를 써서 공통으로 사용하게 할 수 있습니다.
+  
+  ContextLoaderListener와 DispatcherServlet은 각각 ApplicationContext를 생성한다.
+  ContextLoaderListener가 생성하는 ApplicationContext가 root컨텍스트가 되고 DispatcherServlet이 생성한 인스턴스는 root컨텍스트를 부모로 하는 자식 컨텍스트가 된다.
 
-위의 경우와 같이 동시에 필요한 빈은 ContextLoaderListener를 사용함으로써 공통으로 사용하게 할 수 있습니다.
+  참고로, 자식 컨텍스트들은 root컨텍스트의 설정 빈을 사용할 수 있습니다.
 
-ContextLoaderListener와 DispatcherServlet은 각각 ApplicationContext를 생성하는데, ContextLoaderListener가 생성하는 ApplicationContext가 root컨텍스트가 되고 DispatcherServlet이 생성한 인스턴스는 root컨텍스트를 부모로 하는 자식 컨텍스트가 됩니다.
+**[레이어드 실습]**
 
-참고로, 자식 컨텍스트들은 root컨텍스트의 설정 빈을 사용할 수 있습니다.
-
-[실습]
-
-pom.xml 설정시 dynamic web 3.1로 수정안된다 어쩌구
+- pom.xml 설정시 dynamic web 3.1로 수정안되면 .. ->
 오류 수정 참고 url : http://lng1982.tistory.com/199
 
-web.xml 설정 설명 - 강의 두번째 꺼 12:49
+- web.xml 설정 설명 - 강의 두번째 꺼 12:49
 
-쿼리에 'limit' 은 어디 일정 부분을 가져오는 쿼리문(?)
-Dao에는 @repository 라는 어노테이션을 붙여주자.
+- 쿼리에 'limit' 은 어디 일정 부분을 가져오는 쿼리문(?)
+- Dao에는 @repository 라는 어노테이션을 붙여주자.
 
-어떤 메서드 구현 하고 나서 바로 테스트를 해주는 것이 중요하다.
-근데 사실 개발하는 곳에 main 메서드를 여러개 넣어서 막 하는 것은 좋지않다.
-JUnit 같은 단위 테스를 할 수 있는 도구를 공부해서 이용해보자.
+- 메서드 구현 하고 나서 바로 테스트를 해주는 것이 중요한데, 
+  개발하는 곳에 main 메서드를 여러개 넣어서 막 하는 것은 좋지않다.
 
-문자 한글이여서 insert 안 될 때
-참조 : http://ezsnote.tistory.com/entry/mysql-%EB%AC%B8%EC%9E%90%EC%85%8B%EC%9D%B4-%EC%95%88%EB%A7%9E%EC%95%84%EC%84%9C-insert-%EC%95%88%EB%90%98%EB%8A%94-%EA%B2%BD%EC%9A%B0-UTF-8
-방법 1) 테이블 생성시 character set utf8 해주자.
-방법 2) 기존 테이블의 charset을 바꿔주자.
-참조 : http://archmond.net/?p=7659
+  -> JUnit 같은 단위 테스를 할 수 있는 도구를 공부해서 이용해보자.
 
-방법 3) mysql 설정 자체를 바꾸자.
+- 문자 한글이여서 insert 안 될 때
 
-서비스 인터페이스들만 가지고 있는 패키지 : service
-실제 구현체 가지고 있는 패키지 : service.impl
+   - 참조 : <http://ezsnote.tistory.com/entry/mysql-%EB%AC%B8%EC%9E%90%EC%85%8B%EC%9D%B4-%EC%95%88%EB%A7%9E%EC%95%84%EC%84%9C-insert-%EC%95%88%EB%90%98%EB%8A%94-%EA%B2%BD%EC%9A%B0-UTF-8>
 
-+) java implements란?
+   - 방법 1) 테이블 생성시 character set utf8 해주자.
+   - 방법 2) 기존 테이블의 charset을 바꿔주자. <http://archmond.net/?p=7659>
+   - 방법 3) mysql 설정 자체를 바꾸자.
+
+- 서비스 인터페이스들만 가지고 있는 패키지 : service
+- 실제 구현체 가지고 있는 패키지 : service.impl
+
++) java implements란? 
+
 +) 인터페이스란 
 
 
-#### Restcontroller
+### [RestController]
 
-Spring MVC를 이용해 Rest API작성하는 방법 .  
+- Spring MVC를 이용해 Rest API작성하는 방법.  
 
 Rest API / Web API / @RestController / MessageConvertor  
 
 - @RestController  
- - Spring 4에서 Rest API 나 Web API를 개발하기 위해 등장한 어노테이션.
- - 이전 버전의 @Controller랑 @ResponseBody 를 가지고 있다.  
- - JSON 객체 받은 걸 해석해주거나 보낼때도 작성해서 보내는 역할을 한다.  
- - jackson 을 쓰기 때문에 꼭 ! jackson 라이브러리를 추가해줘야 오류가 안난다.  
+  - Spring 4에서 Rest API 나 Web API를 개발하기 위해 등장한 어노테이션.
+  - 이전 버전의 @Controller랑 @ResponseBody 를 가지고 있다.  
+  - JSON 객체 받은 걸 해석해주거나 보낼때도 작성해서 보내는 역할을 한다.  
+  - jackson 을 쓰기 때문에 꼭 ! jackson 라이브러리를 추가해줘야 오류가 안난다.  
 
 - MessageConvertor
- - 자바 객체 & HTTP요청/응답 바디를 변환한다.
- - @ResponseBody , @RequestBody
- - @EnableWebMvc로 인한 기본 설정
- - WebMvcConfigurationSupport를 사용해서 Spring MVC 구현
- - Default MessageConvertor를 제공한다.
- - 링크 바로가기 의 addDefaultHttpMessageConverters메소드 항목 참조
+  - 자바 객체 & HTTP요청/응답 바디를 변환한다.
+  - @ResponseBody , @RequestBody
+  - @EnableWebMvc로 인한 기본 설정
+  - WebMvcConfigurationSupport를 사용해서 Spring MVC 구현
+  - Default MessageConvertor를 제공한다.
+  - 링크 바로가기 의 addDefaultHttpMessageConverters메소드 항목 참조
+
+
+- JSON 응답하기
+  - Controller의 메소드에선 JSON으로 변환될 객체를 반환한다.
+  - jackson라이브러리를 추가하면 JSON으로 변환하는 MessageConvertor가 사용되도록 @EnableWebMvc에서 기본으로 설정되어 있다.
+  - jackson 라이브러리를 추가하지 않으면 JSON메세지로 변환할 수 없어서 500대 오류가 발생한다.
+  - 사용자가 임의로 Messageconverter를 사용하도록 하려면 WebMvcConfiguerAdapter의 confitereMessageConverters메서도를 오버라이딩 하도록 한다.
 
 ++++ Messageconvertor 종류 ++++++  
 ~~~
-ByteArrayHttpMessageConverter
-StringHttpMessageConverter
-ResourceHttpMessageConverter
-SourceHttpMessageConverter
-FormHttpMessageConverter
-Jaxb2RootElementHttpMessageConverter
-MappingJackson2HttpMessageConverter
-MappingJacksonHttpMessageConverter
-AtomFeedHttpMessageConverter
-RssChannelHttpMessageConverter
+- ByteArrayHttpMessageConverter
+- StringHttpMessageConverter
+- ResourceHttpMessageConverter
+- SourceHttpMessageConverter
+- FormHttpMessageConverter
+- Jaxb2RootElementHttpMessageConverter
+- MappingJackson2HttpMessageConverter
+- MappingJacksonHttpMessageConverter
+- AtomFeedHttpMessageConverter
+- RssChannelHttpMessageConverter
 ~~~
 
-- JSON 응답하기
- - Controller의 메소드에선 JSON으로 변환될 객체를 반환한다.
- - jackson라이브러리를 추가하면 JSON으로 변환하는 MessageConvervor가 사용되도록 @EnableWebMvc에서 기본으로 설정되어 있다.
- - jackson 라이브러리를 추가하지 않으면 JSON메세지로 변환할 수 없어서 500대 오류가 발생한다.
- - 사용자가 임의로 Messageconverter를 사용하도록 하려면 WebMvcConfiguerAdapter의 confitereMessageConverters메서도를 오버라이딩 하도록 한다.
 
 --- 
-
 
 ### 오프라인 강의 - BE : spring을 spring boot 2.x 바꾸기
 
